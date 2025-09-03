@@ -11,3 +11,6 @@ Frameworks/ Technologies:
 4) MongoDB:
 -   Justin: Novice
 -   Brendan: Novice
+5) React:
+-   Justin: 
+-   Brendan: Novice
