@@ -1,9 +1,11 @@
-# << Project Title >>
+# Virtual Environment
 ## CS 445 Final Project
 ### Fall 2025
 
-### Team: << team name >>
-<< List Team Members >>
+### Team: Virutal Environment
+- Brendan Bulger
+- Justin Tunney
+- Theo Fahey
 
 ## Getting Started
 <<One paragraph of project description goes here>>

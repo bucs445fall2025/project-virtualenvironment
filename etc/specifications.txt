@@ -1,0 +1,40 @@
+
+- How will you use this application?
+    - To host a virtual game environment (server).
+    - To join and interact with virtual game environments (client).
+- Where would the user be located physically when using this application?
+    - In front of a personal computer.
+- Where would the results be visible?
+    - In a web browser.
+- When will this application be used?
+    - Whenever user wants to set up a game and make it available to join (server).
+    - Whenever user wants to play an available game (client).
+- When can the application fail?
+    - If the server and client aren't able to send each other necessary information; would result in game not loading on client side or client not being able to affect game environment for other users.
+    - If information is not processed/communicated accurately; would result in client seeing incorrect/glitched environment or not having user input be processed consistently.
+    - If server cannot resolve conflicts between clients; would result in incosistent game logic (ex. in a fighting game: player not be able to damage opponent because their input is being ignored by other client and loses "unfairly")
+- Who is my user?
+    - Game developers, user interested in hosting 3D environment (server).
+    - Anyone interested in connecting to a game/environment that's hosted on this application (client).
+- Who will deliver the inputs for the application?
+    - Client-side users who are connected to a specific game instance.
+- Who will recieve the outputs of the application?
+    - Any user who is connected to the relevant game instance.
+- What do I know about this application?
+    - Should be modular and flexible to allow for different use-cases.
+- What does this application need to do?
+    - Maintain communication between server and multiple clients.
+    - Calculate game logic (interactions between players, world terrain, entities, etc.) according to user specification.
+    - Accurately load and render 3D models.
+    - Accurately process game logic according to user-specifications.
+- What are the components of this application?
+    - Server-side application: hosts game instance and handles communication between clients.
+    - Database(s): Contains all game assets and delivers relevant models, textures, and other relevant information as needed.
+    - Client-side application: allows user to access game instance, accurately displaying virtual environment, processing user input, and communicating with server.
+- What needs to happen next?
+    - First step would be to create the actual client application in WebGL that will render game environment and allow for user interaction. We will need to carefully define the data that comprises a "game instance" (models, textures, additional map data (where are light sources, entites located, etc.), scripts for game logic...) and how the application processes and renders those.
+- What must happen before the next step?
+    - Developing a strong enough understanding of WebGL to begin programming the actual program.
+    - Finalizing the design for how game data will be structured (what kinds of objects can be processed and how is data attached to those objects, etc.)
+- What needs to be tracked?
+    - The specifications of how data is loaded and processed, since that will be necessary to actually create any games in the engine. 
