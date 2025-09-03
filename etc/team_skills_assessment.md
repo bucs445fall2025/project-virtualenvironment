@@ -12,5 +12,5 @@ Frameworks/ Technologies:
 -   Justin: Novice
 -   Brendan: Novice
 5) React:
--   Justin: 
+-   Justin: Novice
 -   Brendan: Novice
