@@ -1,9 +1,9 @@
 Frameworks/ Technologies:
-- JavaScript:
+1) JavaScript:
 -   Justin: Novice
-- WebGL:
+2) WebGL:
 -   Justin: None
-- Python:
+3) Python:
 -   Justin: Competent
-- MongoDB:
+4) MongoDB:
 -   Justin: Novice
