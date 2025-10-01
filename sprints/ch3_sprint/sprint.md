@@ -2,7 +2,7 @@
 
 ## **Application Vision/Goal:**
 
-Our application is a simple, collaborative vector art program. It will allow for the creation and manipulation of digital art and images on a canvas that multiple users can collaborate on at once. 
+Our application is a simple, collaborative raster art program. It will allow for the creation and manipulation of digital art and images on a canvas that multiple users can collaborate on at once. 
 
 ## **Scope:**
 
@@ -31,12 +31,12 @@ The design of the project should be such that the core functionality of the appl
 This list is obviously subject to change, but since tools are modular we can implement them each seperately and add as many as we want until we are satisfied. Therefore, the goal would be to work on getting the core functionality fully completed by late October/early November, and spend the rest of the time implementing as many features as possible on top of that base. 
 
 ## **Assumptions:**
-- We are creating a vector art program as opposed to a raster one, since it seems like it would allow for more careful control over the way project data is stored.
+- We are creating a raster art program as opposed to a raster one, since it seems like it would allow for more careful control over the way project data is stored.
 - There are libraries that exist to create image files that we can use to implement the export feature.
 - We can properly interface with art tools such as drawing pads.
 
 ## **Risks:**
-- Projects will store drawings as vector data. There are many different approaches we can take on how to define this data, and a misstep can cause problems for basically every aspect of the application.
+- Projects will store drawings as layers of RGBA data. There are many different approaches we can take on how to define this data, and a misstep can cause problems for basically every aspect of the application.
 - Implementing collaboration will require careful control on how project data is accessed and it may be difficult to resolve conflicts between users (ex. multiple users select and transform part of a drawing in different ways at the same time)
     - To some extent, technical issues with collaboration may just exist as limits for users, ie. users will just have to be aware that if they try to edit the same part of the drawing at the same time it may lead to unexpected behavior, since that's not something it makes sense to be doing in the first place. But this should be reduced as much as possible, and that "unexpected behavior" should not be destructive or cause larger issues for the application, just that their edits may not go through properly.
 
@@ -47,7 +47,7 @@ Simple frontend/server/database structure, similar to what we've discussed in cl
     - Maybe implement disconnect protocol s
 
 ## **Test Environment:**
-Use of automated testing will be limited, likely exclusively to test data and user management. Testing of the actual application will likely be done informally during programming, since the only way to see if the program is working is to try and make something in it. It may be beneficial to devise more formal standards for testing various features down-the-line.
+Use of automated testing will be limited, likely exclusively to test data and user management. Testing of the actual application will likely be done informally during programming, since the only way to see if the program is working is to try and make something in it. It may be beneficial to devise more formal standards for testing various features down-the-line, but testing will likely have to be done manually for the most part.
 
 ---
 
@@ -59,16 +59,19 @@ Use of automated testing will be limited, likely exclusively to test data and us
 - Theo Fahey
 
 ## **Team Roles:**
-[Define roles for each team member, such as developer, designer, project manager, QA tester, etc.]
+Brendan Bulger: Developer, designer, project manager
+Justin Tunney: Developer, designer
+Theo Fahey: Developer
 
 ## **Team Norms:**
 As of right now, we have a group chat for informal or urgent communications (setting meeting times, etc.) and a Discord server for formal meetings and organizing resources. 
 
 ## **Application Stack:**
-[List all the technologies being used in the project, including programming languages, frameworks, and tools.]
 - Node.js
-- React
-- 
+- JavaScript (React)
+- MongoDB
 
 ### **Libraries/Frameworks:**
-[List any specific libraries or frameworks your application will use, such as React, Flask, Django, etc.]
+- WebGL (Main framework for displaying canvas on user-end)
+- React (For general web application functionality)
+- pngjs (For image importing/exporting)
