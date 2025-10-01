@@ -1,3 +1,5 @@
+!! NOTE THAT THIS IS OUTDATED !!
+We decided to change our project concept, because this idea seemed likely to be too big for the scope of the class. I will update this section soon -Brendan
 
 - How will you use this application?
     - To collaboratively draw and design and manipulate digital raster art..
