@@ -1,7 +1,7 @@
 import random
 
-rx = random.randint(1, 10)
-ry = random.randint(1, 10)
+rx = random.randint(1, 100)
+ry = random.randint(1, 100)
 layers = random.randint(1, 1)
 
 with open("data.js", "w") as f:
