@@ -20,8 +20,7 @@ A list of features, function or non-functional, you would like to add in the fut
   >>
   
 ## SRS
-https://docs.google.com/document/d/1hJwyDYVY6z9LcNvRFBygEyuGV7gp_tOHPzgG5SBQyKE/edit?usp=sharing
-  
+https://docs.google.com/document/d/17a48Ve1xbLOr_g78OuTWj0fUKyWFHqJ2wLD4Xs0IKd8/edit?usp=sharing  
 ### Prerequisites
 * [Docker](https://www.docker.com/)
 * <<any additional software. Be specific about versions.>>
