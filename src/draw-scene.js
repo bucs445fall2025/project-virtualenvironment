@@ -1,4 +1,4 @@
-function drawScene(gl, programInfo, buffers, proj) {
+function drawScene(gl, programInfo, buffers, proj, view) {
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
     gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
@@ -11,8 +11,12 @@ function drawScene(gl, programInfo, buffers, proj) {
     gl.useProgram(programInfo.program);
 
     const offset = 0;
-    const vertexCount = proj.layers.length * proj.resolution[0] * proj.resolution[1] * 6;
-    gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
+    const vertexCount = proj.get_res()[0] * proj.get_res()[1] * 6;
+    gl.drawArrays(gl.TRIANGLES, offset, vertexCount);
+
+    // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.canvaspos);
+    // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.canvascol);
+    // gl.drawArrays(gl.LINES, offset, 8);
 }
 
 function setPositionAttribute(gl, buffers, programInfo) {
@@ -27,7 +31,7 @@ function setPositionAttribute(gl, buffers, programInfo) {
 }
 
 function setColorAttribute(gl, buffers, programInfo) {
-    const numComponents = 4;
+    const numComponents = 3;
     const type = gl.FLOAT;
     const normalize = false;
     const stride = 0;

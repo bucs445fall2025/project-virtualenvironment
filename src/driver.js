@@ -2,6 +2,9 @@
 
 import { initBuffers } from "./init-buffers.js";
 import { drawScene } from "./draw-scene.js";
+import { View } from "./view.js";
+import { project_api } from "./project-api.js";
+import { tool_example, tool_example2 } from "./tools.js";
 
 main();
 
@@ -25,11 +28,11 @@ function main() {
         }
     `;
 
-    const proj = JSON.parse(data);
-    console.log(proj);
-
     const canvas = document.querySelector("#gl-canvas");
     const gl = canvas.getContext("webgl");
+
+    const view = new View(gl);
+    const proj = new project_api();
 
     if (gl === null) {
         alert("Unable to initialize WebGL.");
@@ -51,9 +54,66 @@ function main() {
         },
     };
 
-    const buffers = initBuffers(gl, proj);
-    drawScene(gl, programInfo, buffers, proj);
+    const buffers = initBuffers(gl, proj, view);
+    drawScene(gl, programInfo, buffers, proj, view);
     
+    let tool_active = false;
+    let toolb = false;
+    let t = new tool_example2(view);
+    
+    document.addEventListener("keydown", (event) => {
+        console.log(event);
+        if (toolb) {
+            t = new tool_example2(view);
+            toolb = false;
+        } else {
+            t = new tool_example(view);
+            toolb = true;
+        }
+    });
+
+    canvas.addEventListener("wheel", (event) => {
+        event.preventDefault();
+        view.scroll_up(event.deltaY * 0.00001);
+        const buffers = initBuffers(gl, proj, view);
+        drawScene(gl, programInfo, buffers, proj, view);
+    }, { passive: false});
+
+    canvas.addEventListener("mousedown", (event) => {
+        //i*vres - 1 + vpos[0]
+        if (event.buttons == 1) {
+            let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);
+            let y = Math.round((-1 * (event.y*2/view.glh - 1) - view.get_offset()[1] + 1) / view.get_res() - 1)
+            tool_active = true;
+            t.on_mouse_down(x, y);
+        }
+    })
+
+    canvas.addEventListener("mousemove", (event) => {
+        if (event.buttons == 4) {
+            view.add_offset(event.movementX, event.movementY);
+            const buffers = initBuffers(gl, proj, view);
+            drawScene(gl, programInfo, buffers, proj, view);
+        } else 
+        if (tool_active) {
+            let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);
+            let y = Math.round((-1 * (event.y*2/view.glh - 1) - view.get_offset()[1] + 1) / view.get_res() - 1)
+            t.on_mouse_move(x, y);
+        }
+    });
+
+    canvas.addEventListener("mouseup", (event) => {
+        if (tool_active) {
+            let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);
+            let y = Math.round((-1 * (event.y*2/view.glh - 1) - view.get_offset()[1] + 1) / view.get_res() - 1)
+            t.on_mouse_up(x, y);
+            proj.update_pix(0, t.data_send());
+            tool_active = false;
+            const buffers = initBuffers(gl, proj, view);
+            drawScene(gl, programInfo, buffers, proj, view);
+        }
+    })
+
 }
 
 function initShaderProgram(gl, vsSource, fsSource) {
