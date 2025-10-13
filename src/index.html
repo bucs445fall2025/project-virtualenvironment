@@ -9,9 +9,33 @@
       crossorigin="anonymous"
       defer></script>
     <script src="driver.js" type="module"></script>
+
+    <!-- Link to the styling file -->
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
+    <div class="main-top-bar">
+      <div class="title-bar-top">
+        <div class="file-title">Untitled Project</div>
+      </div>
+      <div class="file-menu-top-bar">
+        <button>File</button>
+        <button>Edit</button>
+        <button>IDK</button>
+        <button>IDK</button>
+        <button>IDK</button>
+      </div>
+    </div>
+
+    <div class="main-tool-bar">
+        <button>Undo</button>
+        <button>Redo</button>
+        <button>Select</button>
+        <button>Draw</button>
+        <button>Shape</button>
+    </div>
+
     <canvas id="gl-canvas" width="480" height="480"></canvas>
   </body>
 </html>
