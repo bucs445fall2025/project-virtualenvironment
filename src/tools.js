@@ -39,9 +39,10 @@ class tool_example  {
     start_pos = [0,0]
     end_pos = [0,0]
     rgba = [0,0,0,0]
-    on_mouse_down(x, y, r, g, b, a) {
+    on_mouse_down(x, y, r, g, b, a, layer) {
         this.start_pos = [x,y];
         this.rgba = [r,g,b,a];
+        this.layer = layer;
         console.log(this.rgba);
     }
     on_mouse_move(x, y, dx, dy) {

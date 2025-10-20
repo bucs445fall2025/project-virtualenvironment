@@ -1,12 +1,12 @@
 class View {
     offset = [0,0];
-    layer = 0;
     rgba = [1, 1, 1, 1];
 
     constructor(gl) {
         this.glw = gl.drawingBufferWidth;
         this.glh = gl.drawingBufferHeight;
         this.resolution = 1 / Math.min(this.glw, this.glh);
+        this.layer = 0;
     }
 
     get_res () {
@@ -35,6 +35,11 @@ class View {
         this.rgba[3] = Math.min(1, Math.max(0, this.rgba[3] + da));
         console.log(this.rgba)
 
+    }
+
+    select_layer(l) {
+        this.layer = l;
+        console.log(this.layer);
     }
 
     r() { return this.rgba[0]; }

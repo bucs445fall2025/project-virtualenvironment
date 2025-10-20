@@ -71,21 +71,28 @@ function main() {
                 toolb = true;
             }
         } else if (event.key == "1") {
-            view.mod_rgba(-0.01, 0, 0, 0);
+            view.mod_rgba(-0.1, 0, 0, 0);
         } else if (event.key == "2") {
-            view.mod_rgba(0.01, 0, 0, 0);
+            view.mod_rgba(0.1, 0, 0, 0);
         } else if (event.key == "3") {
-            view.mod_rgba(0, -0.01, 0, 0);
+            view.mod_rgba(0, -0.1, 0, 0);
         } else if (event.key == "4") {
-            view.mod_rgba(0, 0.01, 0, 0);
+            view.mod_rgba(0, 0.1, 0, 0);
         } else if (event.key == "5") {
-            view.mod_rgba(0, 0, -0.01, 0);
+            view.mod_rgba(0, 0, -0.1, 0);
         } else if (event.key == "6") {
-            view.mod_rgba(0, 0, 0.01, 0);
+            view.mod_rgba(0, 0, 0.1, 0);
         } else if (event.key == "7") {
-            view.mod_rgba(0, 0, 0, -0.01);
+            view.mod_rgba(0, 0, 0, -0.1);
         } else if (event.key == "8") {
-            view.mod_rgba(0, 0, 0, 0.01);
+            view.mod_rgba(0, 0, 0, 0.1);
+        } else if (event.key == "]") {
+            let l = view.get_layer();
+            console.log(l)
+            if (l < proj.get_num_layers()) view.select_layer(l + 1);
+        } else if (event.key == "[") {
+            let l = view.get_layer();
+            if (l > 0) view.select_layer(l-1);
         }
     });
 
@@ -124,7 +131,7 @@ function main() {
             let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);
             let y = Math.round((-1 * (event.y*2/view.glh - 1) - view.get_offset()[1] + 1) / view.get_res() - 1)
             t.on_mouse_up(x, y);
-            proj.update_pix(0, t.data_send());
+            proj.update_pix(view.get_layer(), t.data_send());
             tool_active = false;
             const buffers = initBuffers(gl, proj, view);
             drawScene(gl, programInfo, buffers, proj, view);

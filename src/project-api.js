@@ -10,6 +10,15 @@ class project_api {
                 this.data.layers[0][i].push([0, 0, 0, 1]);
             }
         }
+        for (let i = 1; i < 10; i++) {
+            this.data.layers.push([]);
+            for (let j = 0; j < w; j++) {
+                this.data.layers[i].push([]);
+                for (let k = 0; k < h; k++) {
+                    this.data.layers[i][j].push([0,0,0,0]);
+                }
+            }
+        }
     }
 
     get_res() {
@@ -17,11 +26,28 @@ class project_api {
     }
 
     get_num_layers() {
-        return this.layers.length;
+        return this.data.layers.length;
     }
 
     get_pix(layer, x, y) {
         return this.data.layers[layer][x][y];
+    }
+
+    get_pix_sum(x, y) {
+        let col = [];
+        col.push(this.data.layers[0][x][y][0],
+            this.data.layers[0][x][y][1],
+            this.data.layers[0][x][y][2],
+            this.data.layers[0][x][y][3]
+        );
+        for (let l = 0; l < this.get_num_layers(); l++) {
+            let pix = this.data.layers[l][x][y];
+            col[0] = Math.min(1, col[0] * col[3] * (1 - pix[3]) + pix[0] * pix[3]/col[3]);
+            col[1] = Math.min(1, col[0] * col[3] * (1 - pix[3]) + pix[1] * pix[3]/col[3]);
+            col[2] = Math.min(1, col[2] * col[3] * (1 - pix[3]) + pix[2] * pix[3]/col[3]);
+            col[3] = Math.min(1, col[3] * (1 - pix[3]) + pix[3]);
+        }
+        return col;
     }
 
     update_pix(layer, data) {
