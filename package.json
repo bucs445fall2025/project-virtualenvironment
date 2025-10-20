@@ -1,0 +1,18 @@
+{
+  "name": "project-virtualenvironment",
+  "version": "1.0.0",
+  "description": "### Team: Virutal Environment - Brendan Bulger - Justin Tunney - Theo Fahey",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
