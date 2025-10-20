@@ -62,13 +62,30 @@ function main() {
     let t = new tool_example2(view);
     
     document.addEventListener("keydown", (event) => {
-        console.log(event);
-        if (toolb) {
-            t = new tool_example2(view);
-            toolb = false;
-        } else {
-            t = new tool_example(view);
-            toolb = true;
+        if (event.key == "t") {
+            if (toolb) {
+                t = new tool_example2(view);
+                toolb = false;
+            } else {
+                t = new tool_example(view);
+                toolb = true;
+            }
+        } else if (event.key == "1") {
+            view.mod_rgba(-0.01, 0, 0, 0);
+        } else if (event.key == "2") {
+            view.mod_rgba(0.01, 0, 0, 0);
+        } else if (event.key == "3") {
+            view.mod_rgba(0, -0.01, 0, 0);
+        } else if (event.key == "4") {
+            view.mod_rgba(0, 0.01, 0, 0);
+        } else if (event.key == "5") {
+            view.mod_rgba(0, 0, -0.01, 0);
+        } else if (event.key == "6") {
+            view.mod_rgba(0, 0, 0.01, 0);
+        } else if (event.key == "7") {
+            view.mod_rgba(0, 0, 0, -0.01);
+        } else if (event.key == "8") {
+            view.mod_rgba(0, 0, 0, 0.01);
         }
     });
 
@@ -85,7 +102,7 @@ function main() {
             let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);
             let y = Math.round((-1 * (event.y*2/view.glh - 1) - view.get_offset()[1] + 1) / view.get_res() - 1)
             tool_active = true;
-            t.on_mouse_down(x, y);
+            t.on_mouse_down(x, y, view.r(), view.g(), view.b(), view.a());
         }
     })
 

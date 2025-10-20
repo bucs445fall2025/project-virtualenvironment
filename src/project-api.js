@@ -25,7 +25,6 @@ class project_api {
     }
 
     update_pix(layer, data) {
-        console.log(data);
         for (let i = 0; i < data.pix.length; i++) {
             if (data.pix[i].pos[0] > this.data.resolution[0] || data.pix[i].pos[1] > this.data.resolution[1]
                 || data.pix[i].pos[0] < 0 || data.pix[i].pos[1] < 0
