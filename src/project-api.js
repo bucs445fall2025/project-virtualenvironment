@@ -17,7 +17,7 @@ class project_api {
     }
 
     get_num_layers() {
-        return this.layers.length;
+        return this.data.layers.length;
     }
 
     get_pix(layer, x, y) {
