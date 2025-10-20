@@ -43,7 +43,7 @@ class project_api {
         for (let l = 0; l < this.get_num_layers(); l++) {
             let pix = this.data.layers[l][x][y];
             col[0] = Math.min(1, col[0] * col[3] * (1 - pix[3]) + pix[0] * pix[3]/col[3]);
-            col[1] = Math.min(1, col[0] * col[3] * (1 - pix[3]) + pix[1] * pix[3]/col[3]);
+            col[1] = Math.min(1, col[1] * col[3] * (1 - pix[3]) + pix[1] * pix[3]/col[3]);
             col[2] = Math.min(1, col[2] * col[3] * (1 - pix[3]) + pix[2] * pix[3]/col[3]);
             col[3] = Math.min(1, col[3] * (1 - pix[3]) + pix[3]);
         }
