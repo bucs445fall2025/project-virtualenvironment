@@ -38,17 +38,18 @@ class tool_example  {
 
     start_pos = [0,0]
     end_pos = [0,0]
-    on_mouse_down(x, y) {
+    rgba = [0,0,0,0]
+    on_mouse_down(x, y, r, g, b, a, layer) {
         this.start_pos = [x,y];
-        console.log(this.start_pos)
+        this.rgba = [r,g,b,a];
+        this.layer = layer;
+        console.log(this.rgba);
     }
     on_mouse_move(x, y, dx, dy) {
         this.end_pos = [x, y]
-        //console.log(this.end_pos)
     }
     on_mouse_up(x, y) {
         this.end_pos = [x, y]
-        console.log(this.end_pos)
     }
     data_send() {
         let spos = this.start_pos;
@@ -60,7 +61,7 @@ class tool_example  {
             for (let j = spos[1]; (epos[1] > spos[1]) ? j <= epos[1] : j >= epos[1]; j = (epos[1] > spos[1]) ? j + 1 : j - 1) {
                 data.pix.push({
                     pos: [i, j],
-                    rgba: [0.5, 0, 1, 0.5]
+                    rgba: this.rgba
                 })
             }
         }
@@ -71,12 +72,15 @@ class tool_example  {
 class tool_example2 {
     
 
+    rgba = [0,0,0,0];
     constructor(view) {
         this.view = view;
         this.size = 4;
     }
 
-    on_mouse_down(x, y) {
+    on_mouse_down(x, y, r, g, b, a) {
+        this.rgba = [r,g,b,a];
+        console.log(this.rgba);
         this.data = {
             pix: []
         };
@@ -84,7 +88,7 @@ class tool_example2 {
     on_mouse_move(x, y, dx, dy) {
         for (let i = 0; i < this.size; i++) for (let j = 0; j < this.size; j++) this.data.pix.push({
             pos: [x+i-this.size/2, y+j-this.size/2],
-            rgba: [1, 0, 0, 1]
+            rgba: this.rgba
         })
     }
     on_mouse_up(x, y) {
