@@ -16,18 +16,35 @@ function createMockGL() {
   return gl;
 }
 
-// Mock project and view objects
 function createMockProj(width = 2, height = 2) {
-  const data = {
-    resolution: [width, height],
-    layers: [[[ [1, 0, 0, 1], [0, 1, 0, 1] ],
-              [ [0, 0, 1, 1], [1, 1, 0, 1] ]]]
-  };
-  return {
-    get_res: () => data.resolution,
-    get_pix: (layer, x, y) => data.layers[layer][x][y]
-  };
-}
+    const data = {
+      resolution: [width, height],
+      // [layer][x][y] = [r,g,b,a]
+      layers: [
+        [
+          [ [1, 0, 0, 1], [0, 1, 0, 1] ],
+          [ [0, 0, 1, 1], [1, 1, 0, 1] ]
+        ]
+      ]
+    };
+  
+    return {
+      get_res: () => data.resolution,
+      get_num_layers: () => data.layers.length,
+      get_pix_sum: (x, y) => {
+        // Sum across all layers
+        let r = 0, g = 0, b = 0;
+        for (const layer of data.layers) {
+          const pix = layer[x][y];
+          r += pix[0];
+          g += pix[1];
+          b += pix[2];
+        }
+        return [r, g, b];
+      }
+    };
+  }
+  
 
 function createMockView() {
   return {
