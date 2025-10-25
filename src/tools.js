@@ -43,7 +43,6 @@ class tool_example  {
         this.start_pos = [x,y];
         this.rgba = [r,g,b,a];
         this.layer = layer;
-        console.log(this.rgba);
     }
     on_mouse_move(x, y, dx, dy) {
         this.end_pos = [x, y]
@@ -80,7 +79,6 @@ class tool_example2 {
 
     on_mouse_down(x, y, r, g, b, a) {
         this.rgba = [r,g,b,a];
-        console.log(this.rgba);
         this.data = {
             pix: []
         };

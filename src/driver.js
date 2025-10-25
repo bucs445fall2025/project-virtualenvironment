@@ -62,15 +62,8 @@ function main() {
     let t = new tool_example2(view);
     
     document.addEventListener("keydown", (event) => {
-        if (event.key == "t") {
-            if (toolb) {
-                t = new tool_example2(view);
-                toolb = false;
-            } else {
-                t = new tool_example(view);
-                toolb = true;
-            }
-        } else if (event.key == "1") {
+       
+        if (event.key == "1") {
             view.mod_rgba(-0.1, 0, 0, 0);
         } else if (event.key == "2") {
             view.mod_rgba(0.1, 0, 0, 0);
@@ -89,10 +82,32 @@ function main() {
         } else if (event.key == "]") {
             let l = view.get_layer();
             console.log(l)
-            if (l < proj.get_num_layers()) view.select_layer(l + 1);
+            if (l < proj.get_num_layers()-1) view.select_layer(l + 1);
         } else if (event.key == "[") {
             let l = view.get_layer();
             if (l > 0) view.select_layer(l-1);
+        } else if (event.key == "v") {
+            console.log(proj.data.layer_data[view.get_layer()][0]);
+            proj.data.layer_data[view.get_layer()][0] = proj.data.layer_data[view.get_layer()][0] == 1 ? 0 : 1;
+            const buffers = initBuffers(gl, proj, view);
+            drawScene(gl, programInfo, buffers, proj, view);
+        } else if (event.key == "=") {
+            proj.add_layer(view.get_layer());
+            drawScene(gl, programInfo, buffers, proj, view);
+        }
+    });
+
+    document.getElementById("button_draw").addEventListener("click", function() {
+        if (!toolb) {
+            t = new tool_example2(view);
+            toolb = true;
+        }
+    });
+
+    document.getElementById("button_shape").addEventListener("click", function() {
+        if (toolb) {
+            t = new tool_example(view);
+            toolb = false;
         }
     });
 
