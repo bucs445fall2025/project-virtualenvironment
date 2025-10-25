@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ScreenJump</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+      integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+      crossorigin="anonymous"
+      defer></script>
+    <script src="driver.js" type="module"></script>
+
+    <!-- Link to the styling file -->
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="main-top-bar">
+      <div class="title-bar-top">
+        <div class="file-title">Untitled Project</div>
+      </div>
+      <div class="file-menu-top-bar">
+        <button>File</button>
+        <button>Edit</button>
+        <button>IDK</button>
+        <button>IDK</button>
+        <button>IDK</button>
+      </div>
+    </div>
+
+    <div class="main-tool-bar">
+        <button>Undo</button>
+        <button>Redo</button>
+        <button>Select</button>
+        <button id="button_draw">Draw</button>
+        <button id="button_shape">Shape</button>
+    </div>
+
+    <div class="right-panel">
+      <div class="right-panel-header">Panel</div>
+      <div class="right-panel-content">
+        <p>Layers</p>
+        <p>Color picker</p>
+      </div>
+    </div>
+    <canvas id="gl-canvas" width="480" height="480"></canvas>
+  </body>
+</html>
