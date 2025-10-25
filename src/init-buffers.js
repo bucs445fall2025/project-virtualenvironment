@@ -43,12 +43,12 @@ function initPositionBuffer(gl, proj, view) {
 
 function initColorBuffer(gl, proj, view) {
     const pres = proj.get_res();
-    const l = view.get_layer();
+    const llen = proj.get_num_layers();
     let colors = [];
     
     for (let i = 0; i < pres[0]; i++) {
         for (let j = 0; j < pres[1]; j++) {
-            let pix = proj.get_pix(l, i, j)
+            let pix = proj.get_pix_sum(i, j);
             for (let k = 0; k < 6; k++) {
                 colors.push(
                     pix[0], pix[1], pix[2]
