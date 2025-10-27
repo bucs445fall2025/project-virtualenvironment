@@ -9,6 +9,10 @@ class View {
         this.layer = 0;
     }
 
+    update_wh(gl){
+        this.glw = gl.drawingBufferWidth;
+        this.glh = gl.drawingBufferHeight;
+    }
     get_res () {
         return this.resolution;
     }

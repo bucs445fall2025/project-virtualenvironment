@@ -8,9 +8,7 @@
 *{ box-sizing: border-box; }
 
 .main-top-bar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--topbar-h);
+  flex:2;
   background-color: gray;
   color: white;
   padding: 8px 16px;
@@ -50,11 +48,7 @@
 }
 
 .main-tool-bar {
-  position: fixed;
-  top: var(--topbar-h);
-  left: 0;
-  bottom: 0;
-  width: var(--leftbar-w);
+  
   background-color: #3b3b3b;
   padding: 8px;
   display: flex;
@@ -76,12 +70,26 @@
 }
 .main-tool-bar button:hover { background: #666; }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  height: 100%;
+  width:100%;
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 18;
+  align-items: stretch;
+  justify-content: stretch;
+  
+}
 .right-panel {
-  position: fixed;
-  top: var(--topbar-h);
-  right: 0;
-  bottom: 0;
-  width: var(--rightbar-w);
+  flex: 2;
   background: #e9e9e9;
   border-left: 1px solid #d0d0d0;
   display: flex;
@@ -103,12 +111,16 @@
 
 html, body { 
     margin: 0; 
+    height: 100%;
+    width: 100%;
 }
 
 #gl-canvas {
-  display: block;      
-  width: 480px;        
-  height: 480px;        
+  display: block;   
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+  flex: 8;        
   background: #111;    
 }
 

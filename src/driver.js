@@ -30,8 +30,12 @@ function main() {
 
     const canvas = document.querySelector("#gl-canvas");
     const gl = canvas.getContext("webgl");
-
+    console.log(canvas.clientWidth, canvas.clientHeight);
     const view = new View(gl);
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    view.update_wh(gl);
     const proj = new project_api();
 
     if (gl === null) {
@@ -61,6 +65,13 @@ function main() {
     let toolb = false;
     let t = new tool_example2(view);
     
+    window.addEventListener('resize', () =>  {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        view.update_wh(gl);
+
+    })
     document.addEventListener("keydown", (event) => {
        
         if (event.key == "1") {
@@ -135,12 +146,14 @@ function main() {
             drawScene(gl, programInfo, buffers, proj, view);
         } else 
         if (tool_active) {
-            let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);
-            let y = Math.round((-1 * (event.y*2/view.glh - 1) - view.get_offset()[1] + 1) / view.get_res() - 1)
+            let offsets = canvas.getBoundingClientRect();
+            let x = Math.round(((event.x*2/view.glw - 1) + 1) / view.get_res() - 1 - offsets.left);
+            let y = Math.round((-1 * (event.y*2/view.glh - 1) + 1) / view.get_res() - 1 + offsets.bottom);
+            console.log(event.x,view.glw, view.get_res(), offsets.left);
             t.on_mouse_move(x, y);
         }
     });
-
+    
     canvas.addEventListener("mouseup", (event) => {
         if (tool_active) {
             let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);

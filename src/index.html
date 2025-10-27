@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    <div class="main-container">
     <div class="main-top-bar">
       <div class="title-bar-top">
         <div class="file-title">Untitled Project</div>
@@ -28,7 +29,7 @@
         <button>IDK</button>
       </div>
     </div>
-
+    <div class="inner-container">
     <div class="main-tool-bar">
         <button>Undo</button>
         <button>Redo</button>
@@ -36,7 +37,7 @@
         <button id="button_draw">Draw</button>
         <button id="button_shape">Shape</button>
     </div>
-
+    <canvas id="gl-canvas" width="0" height="0"></canvas>
     <div class="right-panel">
       <div class="right-panel-header">Panel</div>
       <div class="right-panel-content">
@@ -58,6 +59,7 @@
         </div>
       </div>
     </div>
-    <canvas id="gl-canvas" width="480" height="480"></canvas>
+    </div>
+    </div>  
   </body>
 </html>
