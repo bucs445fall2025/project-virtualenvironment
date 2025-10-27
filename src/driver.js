@@ -65,13 +65,13 @@ function main() {
     let toolb = false;
     let t = new tool_example2(view);
     
-    window.addEventListener('resize', () =>  {
-        canvas.width = canvas.clientWidth;
-        canvas.height = canvas.clientHeight;
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        view.update_wh(gl);
+    // window.addEventListener('resize', () =>  {
+    //     canvas.width = canvas.clientWidth;
+    //     canvas.height = canvas.clientHeight;
+    //     gl.viewport(0, 0, canvas.width, canvas.height);
+    //     view.update_wh(gl);
 
-    })
+    // })
     document.addEventListener("keydown", (event) => {
        
         if (event.key == "1") {
@@ -120,6 +120,12 @@ function main() {
             t = new tool_example(view);
             toolb = false;
         }
+    });
+
+    const colorpicker = document.getElementById("ui-color");
+    colorpicker.addEventListener("input", function() { 
+        //console.log(colorpicker.value);
+        view.set_rgba(parseInt(colorpicker.value[1, 3], 16)/255, parseInt(colorpicker.value[3, 5], 16)/255, parseInt(colorpicker.value[5, 7], 16)/255, 0);
     });
 
     canvas.addEventListener("wheel", (event) => {

@@ -41,6 +41,10 @@ class View {
 
     }
 
+    set_rgba(r, g, b, a) {
+        this.rgba = [r, g, b, a];
+    }
+
     select_layer(l) {
         this.layer = l;
         console.log(this.layer);
