@@ -41,7 +41,21 @@
       <div class="right-panel-header">Panel</div>
       <div class="right-panel-content">
         <p>Layers</p>
-        <p>Color picker</p>
+
+        
+        <div class="color-picker">
+          <div class="color-picker-row">
+            <label for="ui-color">Color</label>
+            <input id="ui-color" type="color" value="#4f46e5" />
+            <div class="color-swatch" id="ui-swatch" aria-hidden="true"></div>
+          </div>
+
+          <div class="color-picker-row">
+            <label for="ui-hex">Hex</label>
+            <input id="ui-hex" type="text" value="#4F46E5" maxlength="7" spellcheck="false" />
+            <button id="ui-copy" type="button">Copy</button>
+          </div>
+        </div>
       </div>
     </div>
     <canvas id="gl-canvas" width="480" height="480"></canvas>
