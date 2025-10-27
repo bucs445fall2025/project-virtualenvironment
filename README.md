@@ -1,9 +1,11 @@
-# << Project Title >>
+# Virtual Environment
 ## CS 445 Final Project
-### << Semester, Year >>
+### Fall 2025
 
-### Team: << team name >>
-<< List Team Members >>
+### Team: Virutal Environment
+- Brendan Bulger
+- Justin Tunney
+- Theo Fahey
 
 ## Getting Started
 <<One paragraph of project description goes here>>
@@ -18,8 +20,7 @@ A list of features, function or non-functional, you would like to add in the fut
   >>
   
 ## SRS
-[document](url to google doc)
-  
+https://docs.google.com/document/d/17a48Ve1xbLOr_g78OuTWj0fUKyWFHqJ2wLD4Xs0IKd8/edit?usp=sharing  
 ### Prerequisites
 * [Docker](https://www.docker.com/)
 * <<any additional software. Be specific about versions.>>

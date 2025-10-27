@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ScreenJump</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+      integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+      crossorigin="anonymous"
+      defer></script>
+    <script src="driver.js" type="module"></script>
+
+    <!-- Link to the styling file -->
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="main-container">
+    <div class="main-top-bar">
+      <div class="title-bar-top">
+        <div class="file-title">Untitled Project</div>
+      </div>
+      <div class="file-menu-top-bar">
+        <button>File</button>
+        <button>Edit</button>
+        <button>IDK</button>
+        <button>IDK</button>
+        <button>IDK</button>
+      </div>
+    </div>
+    <div class="inner-container">
+    <div class="main-tool-bar">
+        <button>Undo</button>
+        <button>Redo</button>
+        <button>Select</button>
+        <button id="button_draw">Draw</button>
+        <button id="button_shape">Shape</button>
+    </div>
+    <canvas id="gl-canvas"></canvas>
+    <div class="right-panel">
+      <div class="right-panel-header">Panel</div>
+      <div class="right-panel-content">
+        <p>Layers</p>
+
+        
+        <div class="color-picker">
+          <div class="color-picker-row">
+            <label for="ui-color">Color</label>
+            <input id="ui-color" type="color" value="#4f46e5" />
+          </div>
+
+          <!-- <div class="color-picker-row">
+            <label for="ui-hex">Hex</label>
+            <input id="ui-hex" type="text" value="#4F46E5" maxlength="7" spellcheck="false" />
+            <button id="ui-copy" type="button">Copy</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>  
+  </body>
+</html>
