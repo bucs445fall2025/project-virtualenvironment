@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { View } from '../src/view.js';
+import { View } from '../public/js/view.js';
 
 function createMockGL(width = 800, height = 600) {
     return {
