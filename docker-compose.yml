@@ -1,0 +1,23 @@
+services:
+  mongo_db:
+    container_name: database
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      APP_NAME: virtual-environment
+      PORT: 3000
+      DB_URI: mongodb://mongo_db:27017/virtualenvironment
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}
