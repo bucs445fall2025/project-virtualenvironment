@@ -41,20 +41,55 @@
     <div class="right-panel">
       <div class="right-panel-header">Panel</div>
       <div class="right-panel-content">
-        <p>Layers</p>
+        <div class="layers">
+          <div class="layers-header">
+            <span>Layers</span>
+              <div class="layers-actions">
+                <button class="layer-add" type="button" aria-label="Add layer">+</button>
+                <button class="layer-delete" type="button" aria-label="Delete selected">−</button>
+              </div>
+            </div>
 
-        
+            <ul class="layers-list">
+              <li class="layer-item selected">
+              <div class="layer-main">
+                <input type="checkbox" id="layer-1-vis" checked />
+                <label class="layer-name" for="layer-1-vis" contenteditable="true">Layer 1</label>
+              </div>
+              <div class="layer-order">
+                <button class="layer-up" type="button" aria-label="Move up">▲</button>
+                <button class="layer-down" type="button" aria-label="Move down">▼</button>
+              </div>
+            </li>
+
+            <li class="layer-item">
+              <div class="layer-main">
+                <input type="checkbox" id="layer-2-vis" checked />
+                <label class="layer-name" for="layer-2-vis" contenteditable="true">Layer 2</label>
+              </div>
+              <div class="layer-order">
+                <button class="layer-up" type="button" aria-label="Move up">▲</button>
+                <button class="layer-down" type="button" aria-label="Move down">▼</button>
+              </div>
+            </li>
+
+            <li class="layer-item">
+              <div class="layer-main">
+                <input type="checkbox" id="layer-3-vis" />
+                <label class="layer-name" for="layer-3-vis" contenteditable="true">Layer 3</label>
+              </div>
+              <div class="layer-order">
+                <button class="layer-up" type="button" aria-label="Move up">▲</button>
+                <button class="layer-down" type="button" aria-label="Move down">▼</button>
+              </div>
+            </li>
+          </ul>
+        </div>
         <div class="color-picker">
           <div class="color-picker-row">
             <label for="ui-color">Color</label>
             <input id="ui-color" type="color" value="#4f46e5" />
           </div>
-
-          <!-- <div class="color-picker-row">
-            <label for="ui-hex">Hex</label>
-            <input id="ui-hex" type="text" value="#4F46E5" maxlength="7" spellcheck="false" />
-            <button id="ui-copy" type="button">Copy</button>
-          </div> -->
         </div>
       </div>
     </div>
