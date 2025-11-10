@@ -72,6 +72,7 @@ function main() {
     //     view.update_wh(gl);
 
     // })
+    const save_button = document.getElementById("save_image");
     document.addEventListener("keydown", (event) => {
        
         if (event.key == "1") {
@@ -170,7 +171,21 @@ function main() {
             const buffers = initBuffers(gl, proj, view);
             drawScene(gl, programInfo, buffers, proj, view);
         }
-    })
+    });
+
+    function saveToDB(){
+        fetch("http://localhost:3000/api/data/save_project", {
+            method: "POST",
+            body: JSON.stringify({
+                project_title: "Default Title",
+                layers: proj.data.layers,
+                layer_data: proj.data.layer_data
+            })
+        }
+        )
+    }
+    save_button.addEventListener('click', saveToDB)
+
 
 }
 
@@ -202,4 +217,5 @@ function loadShader(gl, type, source) {
         return null;
     }
     return shader;
+
 }

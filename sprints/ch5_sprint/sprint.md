@@ -7,7 +7,7 @@
 
 ***
 
-## Sprint << num >> Review
+## Sprint 5 Review
 
 ### SRS Sections Updated
 
