@@ -1,0 +1,95 @@
+/* General Page Setup */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    padding: 20px 0;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+/* Main Content Area */
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.top-bar h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* New Project Button */
+.new-project-btn {
+    padding: 10px 18px;
+    background-color: #4a4a4a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.new-project-btn:hover {
+    background-color: #333;
+}
+
+/* Project Cards Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+/* Individual Project Card */
+.project-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.project-card h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: #222;
+}
+
+.project-card p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
