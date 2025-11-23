@@ -74,3 +74,9 @@ margin-top: 60px;
 margin-bottom: -40px;
 font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
+.error-message {
+    text-align: center;
+    font-size: 12px;
+    color: red;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
