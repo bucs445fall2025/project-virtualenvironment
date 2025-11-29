@@ -177,7 +177,9 @@ function main() {
         fetch("http://localhost:3000/api/data/save_project", {
             method: "POST",
             body: JSON.stringify({
+                create_new: false,
                 project_title: "Default Title",
+                resolution: proj.data.resolution,
                 layers: proj.data.layers,
                 layer_data: proj.data.layer_data
             })

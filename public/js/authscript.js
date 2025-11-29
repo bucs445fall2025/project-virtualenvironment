@@ -1,7 +1,6 @@
 
 main()
 function main()  {
-    console.log("here");
     const loginForm = document.getElementById('login-form');
     const signupForm = document.getElementById('signup-form');
     const showSignup = document.getElementById('show-signup');
@@ -54,7 +53,6 @@ function main()  {
             })
         });
         const result = await response.json();
-        console.log("result: ", result);
         if (result.error){
             setErrorMessage(result.error);
         }

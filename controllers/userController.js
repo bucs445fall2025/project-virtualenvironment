@@ -7,6 +7,13 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 
+class UserSession {
+    constructor(id, username, email){ 
+        this.id = id;
+        this.username = username;
+        this.email = email;
+    }
+}
 
 const registerUser = asyncHandler(async (req, res) => {
     const {username, email, password} = req.body;
@@ -17,13 +24,12 @@ const registerUser = asyncHandler(async (req, res) => {
     const userAvailable = await User.findOne({email});
 
     if (userAvailable){
-        return res.status(400).json("Email already in use");
+        return res.status(400).json({ error: "Email already in use"});
         throw new Error("Email already in use");
 
     }
     // Hash Password
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("Hashed Password: ", hashedPassword);
 
     const user = await User.create({
         username,
@@ -45,9 +51,11 @@ const registerUser = asyncHandler(async (req, res) => {
             sameSite: "lax",
             maxAge: 12 * 60 * 60 * 1000
         });
-        res.status(201).json({_id: user.id, email: user.email, redirect: '/dashboard'});
+        const newSession = new UserSession(user.id, user.username, user.email);
+        req.session.user = newSession; 
+        res.status(201).json({_id: user.id, email: user.email, redirect: '/homepage'});
     } else {
-        return res.status(400).json("User Data is Not Valid");
+        return res.status(400).json({error: "User Data is Not Valid"});
     }
 });
 
@@ -77,7 +85,9 @@ const loginUser = asyncHandler(async (req, res) => {
             sameSite: "lax",
             maxAge: 12 * 60 * 60 * 1000
         })
-        return res.status(200).json({ redirect: '/dashboard' })
+        const newSession = new UserSession(user.id, user.username, user.email);
+        req.session.user = newSession; 
+        return res.status(200).json({ redirect: '/homepage' })
 
     }
     else {

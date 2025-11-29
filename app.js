@@ -17,6 +17,12 @@ app.use(cors({
     origin: "http://localhost:3000", // your frontend origin
     credentials: true
 }));
+app.use(session({
+    secret: process.env.ACCESS_TOKEN_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {maxAge: 12 * 60 * 60 * 1000}
+}));
 
 connectDb();
 
@@ -32,7 +38,8 @@ app.get("/", async (req, res) => {
     }
     try {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        return res.redirect("/dashboard");
+        return res.redirect("/login");
+        //return res.redirect("/homepage");
     }
     catch{
         return res.redirect("/login");
@@ -40,11 +47,14 @@ app.get("/", async (req, res) => {
 })
 app.get("/dashboard", validateToken, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
-})
+});
 app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "loginPage.html"));
+});
 
-})
+app.get("/homepage", validateToken, (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "start.html"));
+});
 
 app.use(express.static(path.join(__dirname, '/public')));
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScreenJump – Projects</title>
     <link rel="stylesheet" href="start.css">
+    <script src="js/homepage.js" type="module"></script>
 </head>
 <body>
 
@@ -16,27 +17,19 @@
 
         <div class="top-bar">
             <h2>Your Projects</h2>
-            <button class="new-project-btn">+ New Project</button>
+            <button class="new-project-btn" id="new-project-btn">+ New Project</button>
         </div>
 
-        <div class="projects-grid">
-            <!-- Examples. replace with backend stuff -->
-            <div class="project-card">
-                <h3>Project 1</h3>
-                <p>Last edited: Nov 20</p>
-            </div>
-
-            <div class="project-card">
-                <h3>Project 2</h3>
-                <p>Last edited: Nov 18</p>
-            </div>
-
-            <div class="project-card">
-                <h3>Project 3</h3>
-                <p>Last edited: Nov 17</p>
-            </div>
-
+        <div id="projects-grid" class="projects-grid">
         </div>
+        <div id="modal-overlay" class="modal-overlay">
+        <div id="popup-div" class="popup">
+            <span  id="myPopup">Enter Project Name</span>
+            <input type="text" id="project-name" required/> 
+            <button class="new-project-btn" id="submit-btn"> Submit </button>
+            <span id="error-message" style="color: red;"></span>
+        </div>
+    </div>
 
     </main>
 
