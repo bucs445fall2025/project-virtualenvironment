@@ -26,7 +26,7 @@ app.use(session({
 
 connectDb();
 
-app.use(express.json());
+app.use(express.json({ limit: "50mb"}));
 app.use(cookieParser());
 app.use("/api/data", require("./routes/dataRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));

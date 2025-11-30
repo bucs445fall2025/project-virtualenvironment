@@ -1,16 +1,25 @@
 class project_api {
     
-    constructor() {
-        let w = 400
-        let h = 400
-        this.data = {resolution : [w, h],layers : [[]], layer_data: []};
-        for (let i = 0; i < w; i++) {
-            this.data.layers[0].push([]);
-            this.data.layer_data.push([1]);
-            for (let j = 0; j < h; j++) {
-                this.data.layers[0][i].push([0, 0, 0, 1]);
+    constructor(data=null) {
+        // If creating Project for the first time.
+        if (data == null){
+            console.log("here");
+            let w = 400
+            let h = 400
+            this.data = {resolution : [w, h],layers : [[]], layer_data: []};
+            for (let i = 0; i < w; i++) {
+                this.data.layers[0].push([]);
+                this.data.layer_data.push([1]);
+                for (let j = 0; j < h; j++) {
+                    this.data.layers[0][i].push([0, 0, 0, 1]);
+                }
             }
         }
+        else {
+            this.data = {resolution: data.resolution, layers: data.layers, layer_data: data.layer_data}
+            console.log("or-here");
+        }
+
     }
 
     get_res() {

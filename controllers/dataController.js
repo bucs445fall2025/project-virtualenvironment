@@ -42,6 +42,7 @@ const storeProject = asyncHandler(async (req, res) => {
         }
         projectAvailable.data = data; 
         await projectAvailable.save();
+        console.log(`Project Saved Again ${project_name}`)
         return res.status(200).json({message: "save success"});
     }
 
@@ -62,5 +63,20 @@ const getProjects = asyncHandler(async (req, res) => {
     }
 })
 
+const loadProject = asyncHandler(async (req, res) => {
+    const user_email = req.session.user.email;
+    const {project_name} = req.body;
+    if (!user_email){
+        return res.status(400).json({error: "User Not Found"})
+    }
+    try {
+        const project = await Project_Data.findOne({user_email: user_email, project_name: project_name });
+        res.status(200).json({data: project.data});
+    }
+    catch (error) {
+        res.status(400).json({error: "Project Not Loaded"});
+    }
+}
+)
 
-module.exports = { storeProject, getProjects }
+module.exports = { storeProject, getProjects, loadProject }

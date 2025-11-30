@@ -8,7 +8,7 @@ import { tool_example, tool_example2 } from "./tools.js";
 
 main();
 
-function main() {
+async function main() {
 
     const vsSource = `
         attribute vec4 aVertexPosition;
@@ -28,6 +28,7 @@ function main() {
         }
     `;
 
+    const name = new URLSearchParams(window.location.search).get("name");
     const canvas = document.querySelector("#gl-canvas");
     const gl = canvas.getContext("webgl");
     console.log(canvas.clientWidth, canvas.clientHeight);
@@ -36,7 +37,34 @@ function main() {
     canvas.height = canvas.clientHeight;
     gl.viewport(0, 0, canvas.width, canvas.height);
     view.update_wh(gl);
-    const proj = new project_api();
+    let proj;
+
+    await loadProject();
+
+    console.log("proj: ", proj);
+    
+    async function loadProject(){
+        const result = await fetch("http://localhost:3000/api/data/load_project", {
+            method: "POST",
+            headers: {"Content-Type": "application/json" },
+            body: JSON.stringify({
+                project_name: name
+            })
+        }
+        );
+        const data = await result.json();
+        console.log("data: ", data.data);
+        // If data is empty, initialize an empty project file
+        if (data.data.layers.length == 0){
+            proj = new project_api();
+        }
+        else {
+            // Otherwise, load from project
+            proj = new project_api(data.data);
+        }
+    }
+
+    // const proj = new project_api();
 
     if (gl === null) {
         alert("Unable to initialize WebGL.");
@@ -173,20 +201,30 @@ function main() {
         }
     });
 
-    function saveToDB(){
-        fetch("http://localhost:3000/api/data/save_project", {
-            method: "POST",
-            body: JSON.stringify({
-                create_new: false,
-                project_title: "Default Title",
-                resolution: proj.data.resolution,
-                layers: proj.data.layers,
-                layer_data: proj.data.layer_data
-            })
-        }
-        )
+    async function saveToDB(){
+        try {
+            const result = await fetch("http://localhost:3000/api/data/save_project", {
+                method: "POST",
+                headers: {"Content-Type": "application/json" },
+                body: JSON.stringify({
+                    create_new: false,
+                    project_name: name,
+                    resolution: proj.data.resolution,
+                    layers: proj.data.layers,
+                    layer_data: proj.data.layer_data
+                })
+            }
+            )
+            const response = await result.json();
+            if (response.error){
+                console.log(response.error);
+            }
     }
-    save_button.addEventListener('click', saveToDB)
+    catch(error){
+        console.log(error.message);
+    }
+    }
+    save_button.addEventListener('click', saveToDB);
 
 
 }

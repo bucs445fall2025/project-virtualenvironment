@@ -50,7 +50,8 @@ function main(){
                 setErrorMessage(result.error)
             }
             else if (result.redirect){
-                window.location.href = result.redirect
+                window.location.href =`/dashboard?name=${encodeURIComponent(project_name)}`;
+
             }
         }
         catch (error) {
@@ -71,7 +72,8 @@ function main(){
             console.log("projects: ", projects);
             const container = document.getElementById("projects-grid");
             projects.names.forEach(element => {
-                const div = document.createElement(element.project_name);
+                const div = document.createElement("project-card");
+                div.onclick = () => handleClick(element.project_name);
                 const last_modified = new Date(element.last_modified)
                 const formatted = last_modified.toLocaleDateString("en-US", {
                     month: "short",
@@ -91,20 +93,15 @@ function main(){
 
                 container.appendChild(div);
             });
-            // return (
-            //     <div className="projects-grid">
-            //         {projects.map(project => (
-            //             <div key={project._id} className="project-card">
-            //             {project.name}
-            //             </div>
-            //         ))}
-            //         </div>
-            // )
         }
         catch (error){
             throw new Error(error.message);
         }
          
+    }
+    function handleClick(project_name){
+        //When a button is clicked, redirect to the dashboard with the name of the project
+        window.location.href =`/dashboard?name=${encodeURIComponent(project_name)}`;
     }
 
 
