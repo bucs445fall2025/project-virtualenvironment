@@ -15,7 +15,8 @@ services:
     environment:
       APP_NAME: virtual-environment
       PORT: 3000
-      DB_URI: mongodb://mongo_db:27017/virtualenvironment
+      MONGO_URI: mongodb://mongo_db:27017/virtualenvironment
+      ACCESS_TOKEN_SECRET: SCREENJUMP123
     depends_on:
       - mongo_db
 
