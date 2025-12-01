@@ -60,8 +60,8 @@ I don't think there will need to be any unit tests implemented for the GUI.
 
 ### Action Items
 
--Initial GUI layout
--Meeting to discuss GUI, and any potential changes
+- Initial GUI layout
+- Meeting to discuss GUI, and any potential changes
 - Finalized GUI. 
 - If there are any tests, should be implemented
 

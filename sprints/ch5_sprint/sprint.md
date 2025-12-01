@@ -1,9 +1,9 @@
 # Sprint Meeting Notes
 
 
-**Attended**: << record the team members in attendance (virtual counts as long as they are participating) >>
+**Attended**: Theo, Justin, Brendan (Met on Wednesday)
 
-**DATE**: << meeting date >>
+**DATE**: 10/13/2025
 
 ***
 

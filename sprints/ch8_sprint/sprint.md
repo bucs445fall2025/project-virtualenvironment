@@ -1,6 +1,6 @@
 # Sprint Meeting Notes
 
-**Attended**: << record the team members in attendance (virtual counts as long as they are participating) >>
+**Attended**: Theo, Brendan, Justin
 
 **DATE**: 11/3/2025
 
@@ -14,12 +14,12 @@ Updated requirements names to more accurately reflect a problem rather than a so
 
 ### User Story
 
-N/A 
+N/A - Using Technical Flex, however the Undo/Redo is related to the "simple_art" user story, and the export art requirement
+is related to the "save_artwork" user story. 
 
 ### Sprint Requirements Attempted
 
-We attempted to do the Undo/Redo Requirement and the 
-Allow User to Export images requirement, however, we were not able to complete these requirements and will be using a technical flex.
+We attempted to do the Undo/Redo Requirement and the allow User to export images requirement, however, we were not able to complete these requirements and will be using a technical flex.
 
 ### Completed Requirements
 
@@ -31,7 +31,7 @@ We were not able to implement the Undo/Redo functionality and the Export Images 
 
 ### The summary of the entire project
 
-Currently, we have what we had last time, a UI and the logic for drawing as well as a couple of tools. We now also have the framework for a node.js server. 
+Currently, we have what we had last time, a UI and the logic for drawing as well as a couple of tools. We now also have the framework for a node.js server. Additionally, we have the Docker files set up. 
 
 ***
 
@@ -39,7 +39,7 @@ Currently, we have what we had last time, a UI and the logic for drawing as well
 
 ## Requirements Flex
 
-4/5 requirement flexes remaining
+3/5 requirement flexes remaining
 
 ## Technical Debt
 
@@ -57,6 +57,7 @@ save_artwork user story
 ### Planning
 
 Since we are meeting later in the week to prepare our presentation and present, we will discuss our future plan in more detail but tentatively the plan is to hash our own individual work out. 
+
 ### Action Items
 - Undo/Redo
 - Export Images

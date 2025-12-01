@@ -43,7 +43,9 @@ Currently we have a canvas, the logic and functionality for simple drawing on th
 
 ## Technical Debt
 
-Pretty UI, we still need to hash out some issues with hooking the UI up to the logic, and getting the canvas to work.
+Pretty UI, we still need to hash out some issues with hooking the UI up to the logic, and getting the canvas to work. However, 
+I wouldn't necessarily consider this "debt" per se as the UI is always going to be tentative and subject to change based on the 
+actual logic of the program. 
 
 ### Requirement Target
 
