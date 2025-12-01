@@ -3,97 +3,129 @@
   <head>
     <meta charset="utf-8" />
     <title>ScreenJump</title>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
       integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
       crossorigin="anonymous"
       defer></script>
-    <script src="js/driver.js" type="module"></script>
 
-    <!-- Link to the styling file -->
+    <script src="js/driver.js" type="module"></script>
 
     <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
     <div class="main-container">
-    <div class="main-top-bar">
-      <div class="title-bar-top">
-        <div class="file-title">Untitled Project</div>
+
+      <!-- ─────────────────── TOP BAR ─────────────────── -->
+      <div class="main-top-bar">
+
+        <!-- LEFT: FILE BUTTON -->
+        <div class="file-menu-top-bar">
+          <div class="menu-group">
+            <button class="menu-button" type="button">File ▾</button>
+            <div class="menu-dropdown">
+              <button type="button" class="menu-item" id="file-new">New</button>
+              <button type="button" class="menu-item" id="file-open">Open…</button>
+              <button type="button" class="menu-item" id="save_image">Save</button>
+              <button type="button" class="menu-item" id="file-export">Export PNG</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER: TITLE -->
+        <div class="top-bar-center">
+          <div class="title-row">
+            <span class="app-title">ScreenJump</span>
+            <span class="title-separator">•</span>
+            <span class="file-title">Untitled Project</span>
+          </div>
+        </div>
+
       </div>
-      <div class="file-menu-top-bar">
-        <button>File</button>
-        <button>Edit</button>
-        <button id="save_image">Save Image</button>
-        <button>IDK</button>
-        <button>IDK</button>
-      </div>
-    </div>
-    <div class="inner-container">
-    <div class="main-tool-bar">
-        <button>Undo</button>
-        <button>Redo</button>
-        <button>Select</button>
-        <button id="button_draw">Draw</button>
-        <button id="button_shape">Shape</button>
-    </div>
-    <canvas id="gl-canvas"></canvas>
-    <div class="right-panel">
-      <div class="right-panel-header">Panel</div>
-      <div class="right-panel-content">
-        <div class="layers">
-          <div class="layers-header">
-            <span>Layers</span>
-              <div class="layers-actions">
-                <button class="layer-add" type="button" aria-label="Add layer">+</button>
-                <button class="layer-delete" type="button" aria-label="Delete selected">−</button>
+      <!-- ─────────────────────────────────────────────── -->
+
+      <div class="inner-container">
+
+        <!-- LEFT TOOLBAR -->
+        <div class="main-tool-bar">
+          <button type="button">Undo</button>
+          <button type="button">Redo</button>
+          <button type="button">Select</button>
+          <button type="button" id="button_draw">Draw</button>
+          <button type="button" id="button_shape">Shape</button>
+        </div>
+
+        <!-- CANVAS -->
+        <canvas id="gl-canvas"></canvas>
+
+        <!-- RIGHT PANEL -->
+        <div class="right-panel">
+          <div class="right-panel-header">Panel</div>
+
+          <div class="right-panel-content">
+
+            <!-- LAYERS -->
+            <div class="layers">
+              <div class="layers-header">
+                <span>Layers</span>
+                <div class="layers-actions">
+                  <button class="layer-add" type="button" aria-label="Add layer">+</button>
+                  <button class="layer-delete" type="button" aria-label="Delete selected">−</button>
+                </div>
+              </div>
+
+              <ul class="layers-list">
+
+                <li class="layer-item">
+                  <div class="layer-main">
+                    <input type="checkbox" id="layer-1-vis" checked />
+                    <label class="layer-name" for="layer-1-vis" contenteditable="true">Layer 1</label>
+                  </div>
+                  <div class="layer-order">
+                    <button class="layer-up" type="button">▲</button>
+                    <button class="layer-down" type="button">▼</button>
+                  </div>
+                </li>
+
+                <li class="layer-item">
+                  <div class="layer-main">
+                    <input type="checkbox" id="layer-2-vis" checked />
+                    <label class="layer-name" for="layer-2-vis" contenteditable="true">Layer 2</label>
+                  </div>
+                  <div class="layer-order">
+                    <button class="layer-up" type="button">▲</button>
+                    <button class="layer-down" type="button">▼</button>
+                  </div>
+                </li>
+
+                <li class="layer-item">
+                  <div class="layer-main">
+                    <input type="checkbox" id="layer-3-vis" />
+                    <label class="layer-name" for="layer-3-vis" contenteditable="true">Layer 3</label>
+                  </div>
+                  <div class="layer-order">
+                    <button class="layer-up" type="button">▲</button>
+                    <button class="layer-down" type="button">▼</button>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+            <!-- COLOR PICKER -->
+            <div class="color-picker">
+              <div class="color-picker-row">
+                <label for="ui-color">Color</label>
+                <input id="ui-color" type="color" value="#2563eb" />
               </div>
             </div>
 
-            <ul class="layers-list">
-              <li class="layer-item selected">
-              <div class="layer-main">
-                <input type="checkbox" id="layer-1-vis" checked />
-                <label class="layer-name" for="layer-1-vis" contenteditable="true">Layer 1</label>
-              </div>
-              <div class="layer-order">
-                <button class="layer-up" type="button" aria-label="Move up">▲</button>
-                <button class="layer-down" type="button" aria-label="Move down">▼</button>
-              </div>
-            </li>
-
-            <li class="layer-item">
-              <div class="layer-main">
-                <input type="checkbox" id="layer-2-vis" checked />
-                <label class="layer-name" for="layer-2-vis" contenteditable="true">Layer 2</label>
-              </div>
-              <div class="layer-order">
-                <button class="layer-up" type="button" aria-label="Move up">▲</button>
-                <button class="layer-down" type="button" aria-label="Move down">▼</button>
-              </div>
-            </li>
-
-            <li class="layer-item">
-              <div class="layer-main">
-                <input type="checkbox" id="layer-3-vis" />
-                <label class="layer-name" for="layer-3-vis" contenteditable="true">Layer 3</label>
-              </div>
-              <div class="layer-order">
-                <button class="layer-up" type="button" aria-label="Move up">▲</button>
-                <button class="layer-down" type="button" aria-label="Move down">▼</button>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="color-picker">
-          <div class="color-picker-row">
-            <label for="ui-color">Color</label>
-            <input id="ui-color" type="color" value="#4f46e5" />
           </div>
         </div>
+
       </div>
     </div>
-    </div>
-    </div>  
   </body>
 </html>
