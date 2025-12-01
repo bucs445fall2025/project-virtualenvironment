@@ -15,6 +15,8 @@ body {
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #ccc;
+    /* Added relative position to allow absolute positioning of the logout button */
+    position: relative; 
 }
 
 .title {
@@ -22,6 +24,27 @@ body {
     font-weight: 700;
     color: #222;
     margin: 0;
+}
+
+/* Logout Button */
+.logout-btn {
+    position: absolute;
+    right: 30px; /* Distance from right edge */
+    top: 50%;
+    transform: translateY(-50%); /* Vertically center */
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid #999;
+    color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #d1d1d1;
+    border-color: #666;
 }
 
 /* Main Content Area */
