@@ -101,4 +101,21 @@ const loginUser = asyncHandler(async (req, res) => {
 const currentUser = asyncHandler(async (req, res) => {
     res.json({message: "Login User"})
 });
-module.exports = { registerUser, loginUser, currentUser }
+
+const logoutUser = asyncHandler(async (req, res) => {
+    res.clearCookie("accessToken");
+
+    //Taken from express website
+    req.session.user = null
+    req.session.save(function (err) {
+      if (err) next(err)
+  
+      // regenerate the session, which is good practice to help
+      // guard against forms of session fixation
+      req.session.regenerate(function (err) {
+        if (err) next(err)
+        res.status(201).json({redirect: '/'})
+      })
+    })
+})
+module.exports = { registerUser, loginUser, currentUser, logoutUser }

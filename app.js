@@ -38,8 +38,7 @@ app.get("/", async (req, res) => {
     }
     try {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        return res.redirect("/login");
-        //return res.redirect("/homepage");
+        return res.redirect("/homepage");
     }
     catch{
         return res.redirect("/login");

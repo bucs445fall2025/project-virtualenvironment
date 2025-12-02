@@ -6,11 +6,13 @@ function main(){
     const overlay = document.getElementById("modal-overlay");
     const submit_btn = document.getElementById("submit-btn");
     const error_message = document.getElementById("error-message");
+    const logout_btn = document.getElementById("logout-btn");
 
     submit_btn.addEventListener('click', createProject);
     overlay.addEventListener('click', closePopup);
     new_project_btn.addEventListener('click', openPopup);
-    
+    logout_btn.addEventListener('click', logoutUser);
+
     displayProjects();
 
     function openPopup(){
@@ -102,6 +104,17 @@ function main(){
     function handleClick(project_name){
         //When a button is clicked, redirect to the dashboard with the name of the project
         window.location.href =`/dashboard?name=${encodeURIComponent(project_name)}`;
+    }
+    async function logoutUser(e){
+        const result = await fetch("http://localhost:3000/api/users/logout", {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        });
+        const response = await result.json();
+
+        if (response.redirect){
+            window.location.href = response.redirect;
+        }
     }
 
 

@@ -28,10 +28,10 @@ async function main() {
         }
     `;
 
-    const name = new URLSearchParams(window.location.search).get("name");
+    const project_name = new URLSearchParams(window.location.search).get("name");
+    setName(); //Small function
     const canvas = document.querySelector("#gl-canvas");
     const gl = canvas.getContext("webgl");
-    console.log(canvas.clientWidth, canvas.clientHeight);
     const view = new View(gl);
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -40,15 +40,13 @@ async function main() {
     let proj;
 
     await loadProject();
-
-    console.log("proj: ", proj);
     
     async function loadProject(){
         const result = await fetch("http://localhost:3000/api/data/load_project", {
             method: "POST",
             headers: {"Content-Type": "application/json" },
             body: JSON.stringify({
-                project_name: name
+                project_name: project_name
             })
         }
         );
@@ -208,7 +206,7 @@ async function main() {
                 headers: {"Content-Type": "application/json" },
                 body: JSON.stringify({
                     create_new: false,
-                    project_name: name,
+                    project_name: project_name,
                     resolution: proj.data.resolution,
                     layers: proj.data.layers,
                     layer_data: proj.data.layer_data
@@ -226,6 +224,10 @@ async function main() {
     }
     save_button.addEventListener('click', saveToDB);
 
+    function setName(){
+        const title = document.getElementById("file-title");
+        title.textContent = project_name;
+    }
 
 }
 

@@ -360,3 +360,11 @@ body {
     padding: 0;
     background-color: #ffffff;
 }
+
+/* .notification {
+    position: absolute;
+    left: 50%;
+    transform:translateX(-50%);
+    background-color: gainsboro;
+    border-radius: 6px;
+} */
