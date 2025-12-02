@@ -7,6 +7,7 @@ function main(){
     const submit_btn = document.getElementById("submit-btn");
     const error_message = document.getElementById("error-message");
     const logout_btn = document.getElementById("logout-btn");
+    
 
     submit_btn.addEventListener('click', createProject);
     overlay.addEventListener('click', closePopup);

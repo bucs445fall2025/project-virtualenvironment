@@ -30,6 +30,13 @@ async function main() {
 
     const project_name = new URLSearchParams(window.location.search).get("name");
     setName(); //Small function
+    const save_button = document.getElementById("save_image");
+    const close_popup = document.getElementById("close");
+    const notification = document.getElementById('notification');
+
+    save_button.addEventListener('click', saveToDB);
+    close_popup.addEventListener('click', closeNoti);
+
     const canvas = document.querySelector("#gl-canvas");
     const gl = canvas.getContext("webgl");
     const view = new View(gl);
@@ -98,7 +105,6 @@ async function main() {
     //     view.update_wh(gl);
 
     // })
-    const save_button = document.getElementById("save_image");
     document.addEventListener("keydown", (event) => {
        
         if (event.key == "1") {
@@ -200,6 +206,7 @@ async function main() {
     });
 
     async function saveToDB(){
+        let noti_message = "Project Saved!"
         try {
             const result = await fetch("http://localhost:3000/api/data/save_project", {
                 method: "POST",
@@ -220,9 +227,29 @@ async function main() {
     }
     catch(error){
         console.log(error.message);
+        noti_message = "Project Unable To Be Saved"
     }
+
+    const noti_text = document.getElementById('noti-text');
+    noti_text.textContent = noti_message;
+    // Now Show Notification Popup
+    showNoti();
+
     }
-    save_button.addEventListener('click', saveToDB);
+    function showNoti(){
+        notification.classList.add("show");
+
+        setTimeout(() => {
+            notification.classList.add("hide");
+            setTimeout(() => {
+                notification.classList.remove("hide", "show");
+            }, 400)
+        }, 5000);
+    }
+    function closeNoti(){
+        //Closes noti if cross button is clicked
+        notification.classList.remove("show");
+    }
 
     function setName(){
         const title = document.getElementById("file-title");

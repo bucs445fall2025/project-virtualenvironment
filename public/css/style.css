@@ -361,10 +361,65 @@ body {
     background-color: #ffffff;
 }
 
-/* .notification {
+.notification {
     position: absolute;
     left: 50%;
     transform:translateX(-50%);
     background-color: gainsboro;
     border-radius: 6px;
-} */
+    overflow: hidden;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    p {
+        padding-left: 10px;
+    }
+    .close{
+        background-color: #bdbdbd;
+        padding: 1rem;
+        cursor: pointer;
+
+        svg {
+            padding-top: 2px;
+            fill: darkgrey;
+        }
+    }
+}
+.notification.show{
+    animation:display 400ms ease-in-out forwards;
+    display: flex;
+}
+
+.notification.hide{
+    animation:hide 400ms ease-in-out forwards;
+}
+
+@keyframes display{
+    0%{
+        opacity: 0;
+        top: 0;
+    }
+    5%{
+        opacity: 0;
+    
+    }
+    100%{
+        opacity: 1;
+        top:2rem;
+    }
+}
+
+@keyframes hide{
+    0%{
+        opacity: 1;
+        top:2rem 
+    }
+    40%{
+        top: 0;
+    }
+    100%{
+        opacity:0;
+    }
+}
