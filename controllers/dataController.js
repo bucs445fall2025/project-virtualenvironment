@@ -79,4 +79,18 @@ const loadProject = asyncHandler(async (req, res) => {
 }
 )
 
-module.exports = { storeProject, getProjects, loadProject }
+const deleteProject = asyncHandler(async (req, res) => {
+    const user_email = req.session.user.email;
+    const {project_name} = req.body;
+    if (!user_email){
+        return res.status(400).json({error: "User Not Found"});
+    }
+    try {
+        const result = await Project_Data.deleteOne({user_email: user_email, project_name: project_name});
+        return res.status(200).json({message: "Deleted Successfully"})
+    }
+    catch(err){
+        return res.status(400).json({error: err});
+    }
+})
+module.exports = { storeProject, getProjects, loadProject, deleteProject }

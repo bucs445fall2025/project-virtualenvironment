@@ -94,10 +94,13 @@ body {
 .project-card {
     background-color: #ffffff;
     border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
     border: 1px solid #ddd;
     cursor: pointer;
     transition: 0.25s ease;
+    display: flex;
 }
 
 .project-card h3 {
@@ -162,6 +165,31 @@ body {
     justify-content: center; 
     align-items: center;
 }
+
+
+.delete-container{
+    border-color: red;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    padding: 15px;
+
+    svg {
+        stroke: red;
+    }
+
+}
+.text-container{
+    display: flex;
+    flex-direction: column;
+}
+.button-container{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translate(-50%, -60%); }
