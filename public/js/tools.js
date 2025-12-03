@@ -72,6 +72,7 @@ class tool_example2 {
     
 
     rgba = [0,0,0,0];
+    last_pix = [0,0];
     constructor(view) {
         this.view = view;
         this.size = 4;
@@ -79,15 +80,50 @@ class tool_example2 {
 
     on_mouse_down(x, y, r, g, b, a) {
         this.rgba = [r,g,b,a];
+        this.last_pix = [x,y];
+        console.log(x, y)
         this.data = {
             pix: []
         };
-    }
-    on_mouse_move(x, y, dx, dy) {
         for (let i = 0; i < this.size; i++) for (let j = 0; j < this.size; j++) this.data.pix.push({
-            pos: [x+i-this.size/2, y+j-this.size/2],
-            rgba: this.rgba
-        })
+                pos: [x+i-this.size/2, y+j-this.size/2],
+                rgba: this.rgba
+            })
+    }
+    on_mouse_move(x, y) {
+        console.log(x, y)
+        let dx = x - this.last_pix[0];
+        let dy = y - this.last_pix[1];
+        if (Math.abs(dx) >= Math.abs(dy)) {
+            let cx = this.last_pix[0];
+            let cyr = this.last_pix[1];
+            let cy = cyr;
+            let dif = Math.sign(dx);
+            for (let k = 1; k <= Math.abs(dx); k++) {
+                cx += dif;
+                cyr += dy/Math.abs(dx);
+                cy = Math.floor(cyr);
+                for (let i = 0; i < this.size; i++) for (let j = 0; j < this.size; j++) this.data.pix.push({
+                    pos: [cx+i-this.size/2, cy+j-this.size/2],
+                    rgba: this.rgba
+                })
+            }
+        } else {
+            let cxr = this.last_pix[0];
+            let cx = cxr
+            let cy = this.last_pix[1];
+            let dif = Math.sign(dy);
+            for (let k = 1; k <= Math.abs(dy); k++) {
+                cy += dif;
+                cxr += dx/Math.abs(dy);
+                cx = Math.floor(cxr);
+                for (let i = 0; i < this.size; i++) for (let j = 0; j < this.size; j++) this.data.pix.push({
+                    pos: [cx+i-this.size/2, cy+j-this.size/2],
+                    rgba: this.rgba
+                })
+            }
+        }
+        this.last_pix = [x, y]
     }
     on_mouse_up(x, y) {
 

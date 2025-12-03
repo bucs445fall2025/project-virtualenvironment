@@ -58,7 +58,6 @@ async function main() {
         }
         );
         const data = await result.json();
-        console.log("data: ", data.data);
         // If data is empty, initialize an empty project file
         if (data.data.layers.length == 0){
             proj = new project_api();
@@ -105,6 +104,7 @@ async function main() {
     //     view.update_wh(gl);
 
     // })
+
     document.addEventListener("keydown", (event) => {
        
         if (event.key == "1") {
@@ -125,13 +125,11 @@ async function main() {
             view.mod_rgba(0, 0, 0, 0.1);
         } else if (event.key == "]") {
             let l = view.get_layer();
-            console.log(l)
             if (l < proj.get_num_layers()-1) view.select_layer(l + 1);
         } else if (event.key == "[") {
             let l = view.get_layer();
             if (l > 0) view.select_layer(l-1);
         } else if (event.key == "v") {
-            console.log(proj.data.layer_data[view.get_layer()][0]);
             proj.data.layer_data[view.get_layer()][0] = proj.data.layer_data[view.get_layer()][0] == 1 ? 0 : 1;
             const buffers = initBuffers(gl, proj, view);
             drawScene(gl, programInfo, buffers, proj, view);
@@ -157,8 +155,7 @@ async function main() {
 
     const colorpicker = document.getElementById("ui-color");
     colorpicker.addEventListener("input", function() { 
-        //console.log(colorpicker.value);
-        view.set_rgba(parseInt(colorpicker.value[1, 3], 16)/255, parseInt(colorpicker.value[3, 5], 16)/255, parseInt(colorpicker.value[5, 7], 16)/255, 0);
+        view.set_rgba(parseInt(colorpicker.value.substring(1,3), 16)/255, parseInt(colorpicker.value.substring(3,5), 16)/255, parseInt(colorpicker.value.substring(5,7), 16)/255, 1);
     });
 
     canvas.addEventListener("wheel", (event) => {
@@ -171,9 +168,10 @@ async function main() {
     canvas.addEventListener("mousedown", (event) => {
         //i*vres - 1 + vpos[0]
         if (event.buttons == 1) {
-            let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);
-            let y = Math.round((-1 * (event.y*2/view.glh - 1) - view.get_offset()[1] + 1) / view.get_res() - 1)
+            let x = Math.round((((event.offsetX)/view.glw)*2 - view.get_offset()[0]) / view.get_res());
+            let y = Math.round(((1 - (event.offsetY)/view.glh)*2 - view.get_offset()[1]) / view.get_res());
             tool_active = true;
+            console.log("x:", x, "y:", y, "client x:", event.offsetX, "client y:", event.offsetY, "offsets:", view.get_offset(), "glw:", view.glw, "glh:", view.glh, "res:", view.get_res());
             t.on_mouse_down(x, y, view.r(), view.g(), view.b(), view.a());
         }
     })
@@ -186,17 +184,16 @@ async function main() {
         } else 
         if (tool_active) {
             let offsets = canvas.getBoundingClientRect();
-            let x = Math.round(((event.x*2/view.glw - 1) + 1) / view.get_res() - 1 - offsets.left);
-            let y = Math.round((-1 * (event.y*2/view.glh - 1) + 1) / view.get_res() - 1 + offsets.bottom);
-            console.log(event.x,view.glw, view.get_res(), offsets.left);
+            let x = Math.round((((event.offsetX)/view.glw)*2 - view.get_offset()[0]) / view.get_res());
+            let y = Math.round(((1 - (event.offsetY)/view.glh)*2 - view.get_offset()[1]) / view.get_res());
             t.on_mouse_move(x, y);
         }
     });
     
     canvas.addEventListener("mouseup", (event) => {
         if (tool_active) {
-            let x = Math.round(((event.x*2/view.glw - 1) - view.get_offset()[0] + 1) / view.get_res() - 1);
-            let y = Math.round((-1 * (event.y*2/view.glh - 1) - view.get_offset()[1] + 1) / view.get_res() - 1)
+            let x = Math.round((((event.offsetX)/view.glw) - view.get_offset()[0]) / view.get_res() * 2);
+            let y = Math.round(((1 - (event.offsetY)/view.glh) - view.get_offset()[1]) / view.get_res() * 2);
             t.on_mouse_up(x, y);
             proj.update_pix(view.get_layer(), t.data_send());
             tool_active = false;
