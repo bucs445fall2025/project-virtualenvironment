@@ -13,6 +13,7 @@ function drawScene(gl, programInfo, buffers, proj, view) {
     const offset = 0;
     const vertexCount = proj.get_res()[0] * proj.get_res()[1] * 6;
     gl.drawArrays(gl.TRIANGLES, offset, vertexCount);
+    gl.drawArrays(gl.POINTS, vertexCount, view.prev_array.length);
 
     // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.canvaspos);
     // gl.bindBuffer(gl.ARRAY_BUFFER, buffers.canvascol);

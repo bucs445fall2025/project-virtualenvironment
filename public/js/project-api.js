@@ -7,9 +7,9 @@ class project_api {
             let w = 400
             let h = 400
             this.data = {resolution : [w, h],layers : [[]], layer_data: []};
+            this.data.layer_data.push([1]);
             for (let i = 0; i < w; i++) {
                 this.data.layers[0].push([]);
-                this.data.layer_data.push([1]);
                 for (let j = 0; j < h; j++) {
                     this.data.layers[0][i].push([0, 0, 0, 1]);
                 }
@@ -19,6 +19,8 @@ class project_api {
             this.data = {resolution: data.resolution, layers: data.layers, layer_data: data.layer_data}
             console.log("or-here");
         }
+
+        console.log(this.data);
 
     }
 
@@ -80,9 +82,8 @@ class project_api {
                 new_layer[i].push([0, 0, 0, 0]);
             }
         }
-
         this.data.layers = this.data.layers.slice(0, layer_index+1).concat([new_layer]).concat(this.data.layers.slice(layer_index+1, this.get_num_layers()));
-        this.data.layer_data = this.data.layer_data.slice(0, layer_index+1).concat([1]).concat(this.data.layer_data.slice(layer_index+1, this.get_num_layers()));
+        this.data.layer_data = this.data.layer_data.slice(0, layer_index+1).concat([[1]]).concat(this.data.layer_data.slice(layer_index+1, this.get_num_layers()));
         console.log(this.data);
     }
 }

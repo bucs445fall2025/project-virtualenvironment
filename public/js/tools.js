@@ -91,7 +91,6 @@ class tool_example2 {
             })
     }
     on_mouse_move(x, y) {
-        console.log(x, y)
         let dx = x - this.last_pix[0];
         let dy = y - this.last_pix[1];
         if (Math.abs(dx) >= Math.abs(dy)) {

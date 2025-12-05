@@ -133,6 +133,7 @@ async function main() {
             proj.data.layer_data[view.get_layer()][0] = proj.data.layer_data[view.get_layer()][0] == 1 ? 0 : 1;
             const buffers = initBuffers(gl, proj, view);
             drawScene(gl, programInfo, buffers, proj, view);
+            console.log(view.get_layer(), proj.data.layer_data[view.get_layer()][0]);
         } else if (event.key == "=") {
             proj.add_layer(view.get_layer());
             drawScene(gl, programInfo, buffers, proj, view);
@@ -183,6 +184,9 @@ async function main() {
             drawScene(gl, programInfo, buffers, proj, view);
         } else 
         if (tool_active) {
+            view.push_prev(event.offsetX, event.offsetY);
+            const buffers = initBuffers(gl, proj, view);
+            drawScene(gl, programInfo, buffers, proj, view);
             let offsets = canvas.getBoundingClientRect();
             let x = Math.round((((event.offsetX)/view.glw)*2 - view.get_offset()[0]) / view.get_res());
             let y = Math.round(((1 - (event.offsetY)/view.glh)*2 - view.get_offset()[1]) / view.get_res());
@@ -192,6 +196,7 @@ async function main() {
     
     canvas.addEventListener("mouseup", (event) => {
         if (tool_active) {
+            view.clear_prev();
             let x = Math.round((((event.offsetX)/view.glw) - view.get_offset()[0]) / view.get_res() * 2);
             let y = Math.round(((1 - (event.offsetY)/view.glh) - view.get_offset()[1]) / view.get_res() * 2);
             t.on_mouse_up(x, y);
