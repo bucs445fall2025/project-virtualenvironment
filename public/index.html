@@ -24,8 +24,6 @@
           <div class="menu-group">
             <button class="menu-button" type="button">File ▾</button>
             <div class="menu-dropdown">
-              <button type="button" class="menu-item" id="file-new">New</button>
-              <button type="button" class="menu-item" id="file-open">Open…</button>
               <button type="button" class="menu-item" id="save_image">Save</button>
               <button type="button" class="menu-item" id="file-export">Export PNG</button>
               <button type="button" class="menu-item" onclick="window.location.href='start.html'">Home</button>
@@ -47,11 +45,11 @@
 
         <!-- LEFT TOOLBAR -->
         <div class="main-tool-bar">
-          <button type="button">Undo</button>
-          <button type="button">Redo</button>
-          <button type="button">Select</button>
-          <button type="button" id="button_draw">Draw</button>
-          <button type="button" id="button_shape">Shape</button>
+          <!-- <button type="button" id="button_undo">Undo</button>
+          <button type="button" id="button_redo">Redo</button> -->
+          <button type="button" id="button_draw">Pencil</button>
+          <button type="button" id="button_shape">Rectangle</button>
+          <button type="button" id="button_fill">Fill</button>
         </div>
 
         <div id="notification" class="notification">
@@ -73,24 +71,26 @@
               <div class="layers-header">
                 <span>Layers</span>
                 <div class="layers-actions">
-                  <button class="layer-add" type="button" aria-label="Add layer">+</button>
-                  <button class="layer-delete" type="button" aria-label="Delete selected">−</button>
+                  <button class="layer-add" type="button" id="layer_add" aria-label="Add layer">+</button>
+                  <button class="layer-delete" type="button" id="layer_delete" aria-label="Delete selected">−</button>
                 </div>
               </div>
 
-              <ul class="layers-list">
+              <div class="layers-list">
 
-                <li class="layer-item">
+                <!-- <span id="layer_info"></span> -->
+
+                <!-- <li class="layer-item">
                   <div class="layer-main">
                     <input type="checkbox" id="layer-1-vis" checked />
                     <label class="layer-name" for="layer-1-vis" contenteditable="true">Layer 1</label>
-                  </div>
-                  <div class="layer-order">
+                  </div> -->
+                  <!-- <div class="layer-order">
                     <button class="layer-up" type="button">▲</button>
                     <button class="layer-down" type="button">▼</button>
-                  </div>
-                </li>
-
+                  </div> -->
+                <!-- </li> -->
+<!-- 
                 <li class="layer-item">
                   <div class="layer-main">
                     <input type="checkbox" id="layer-2-vis" checked />
@@ -111,14 +111,14 @@
                     <button class="layer-up" type="button">▲</button>
                     <button class="layer-down" type="button">▼</button>
                   </div>
-                </li>
+                </li> -->
 
-              </ul>
+              </div>
             </div>
             <div class="color-picker">
               <div class="color-picker-row">
                 <label for="ui-color">Color</label>
-                <input id="ui-color" type="color" value="#2563eb" />
+                <input id="ui-color" type="color" value="#ffffff" />
               </div>
             </div>
 
@@ -126,6 +126,9 @@
         </div>
 
       </div>
+    </div>
+    <div id="export">
+      <canvas id="exp"></canvas>
     </div>
   </body>
 </html>

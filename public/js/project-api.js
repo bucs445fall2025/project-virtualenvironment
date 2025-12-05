@@ -1,14 +1,14 @@
 class project_api {
-    
+
     constructor(data=null) {
         // If creating Project for the first time.
         if (data == null){
             let w = 400
             let h = 400
             this.data = {resolution : [w, h],layers : [[]], layer_data: []};
+            this.data.layer_data.push([1]);
             for (let i = 0; i < w; i++) {
                 this.data.layers[0].push([]);
-                this.data.layer_data.push([1]);
                 for (let j = 0; j < h; j++) {
                     this.data.layers[0][i].push([0, 0, 0, 1]);
                 }
@@ -17,6 +17,11 @@ class project_api {
         else {
             this.data = {resolution: data.resolution, layers: data.layers, layer_data: data.layer_data}
         }
+
+        this.step_pos = 0;
+        this.step_queue = [this.data.layers];
+
+        console.log(this.data);
 
     }
 
@@ -68,6 +73,31 @@ class project_api {
             ];
             this.data.layers[layer][data.pix[i].pos[0]][data.pix[i].pos[1]] = rgba_out;
         }
+        if (this.step_pos < 0) {
+            this.step_queue = this.step_queue.slice(0, this.step_pos);
+            this.step_pos = 0;
+        }
+        if (this.step_pos.length > 11) {
+            this.step_queue = this.step_queue.slice(1);
+        }
+        this.step_queue.push(this.data.layers.slice());
+    }
+
+    undo() {
+        console.log(this.step_pos, this.step_queue, this.data.layers)
+        this.step_pos -= 1;
+        if (-1 * this.step_pos >= this.step_queue.length) this.step_pos = -1 * this.step_queue.length + 1;
+        this.data.layers = this.step_queue[this.step_queue.length - 1 + this.step_pos].slice();
+        console.log(this.step_pos, this.step_queue, this.data.layers)
+    }
+
+    redo() {
+        this.step_pos += 1;
+        if (this.step_pos > 0) {
+            this.step_pos = 0;
+        } else {
+            this.data.layers = this.step_queue[this.step_queue.length - 1 + this.step_pos].slice();
+        }
     }
 
     add_layer(layer_index) {
@@ -78,10 +108,14 @@ class project_api {
                 new_layer[i].push([0, 0, 0, 0]);
             }
         }
-
         this.data.layers = this.data.layers.slice(0, layer_index+1).concat([new_layer]).concat(this.data.layers.slice(layer_index+1, this.get_num_layers()));
-        this.data.layer_data = this.data.layer_data.slice(0, layer_index+1).concat([1]).concat(this.data.layer_data.slice(layer_index+1, this.get_num_layers()));
+        this.data.layer_data = this.data.layer_data.slice(0, layer_index+1).concat([[1]]).concat(this.data.layer_data.slice(layer_index+1, this.get_num_layers()));
         console.log(this.data);
+    }
+
+    delete_layer(layer_index) {
+        this.data.layers = this.data.layers.slice(0, layer_index).concat(this.data.layers.slice(layer_index+1, this.get_num_layers()));
+        this.data.layer_data = this.data.layer_data.slice(0, layer_index).concat(this.data.layer_data.slice(layer_index+1, this.get_num_layers()));
     }
 }
 

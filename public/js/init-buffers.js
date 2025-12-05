@@ -29,6 +29,7 @@ function initPositionBuffer(gl, proj, view) {
             );
         }
     }
+
 //    positions.push(
 //     -1, -1, -1, 0, 0, -1, -1, 0, 0, -1, 0, 0
 //    );

@@ -2,6 +2,8 @@ class View {
     offset = [0,0];
     rgba = [1, 1, 1, 1];
 
+    prev_array = [];
+
     constructor(gl) {
         this.glw = gl.drawingBufferWidth;
         this.glh = gl.drawingBufferHeight;
@@ -48,6 +50,14 @@ class View {
     select_layer(l) {
         this.layer = l;
         console.log(this.layer);
+    }
+
+    push_prev(x, y) {
+        this.prev_array.push([x, y]);
+    }
+
+    clear_prev() {
+        this.prev_array = [];
     }
 
     r() { return this.rgba[0]; }

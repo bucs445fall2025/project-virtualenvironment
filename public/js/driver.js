@@ -4,7 +4,7 @@ import { initBuffers } from "./init-buffers.js";
 import { drawScene } from "./draw-scene.js";
 import { View } from "./view.js";
 import { project_api } from "./project-api.js";
-import { tool_example, tool_example2 } from "./tools.js";
+import { t_pencil, t_rectangle, t_fill } from "./tools.js";
 
 main();
 
@@ -94,8 +94,7 @@ async function main() {
     drawScene(gl, programInfo, buffers, proj, view);
     
     let tool_active = false;
-    let toolb = false;
-    let t = new tool_example2(view);
+    let t = new t_pencil(view);
     
     // window.addEventListener('resize', () =>  {
     //     canvas.width = canvas.clientWidth;
@@ -133,6 +132,7 @@ async function main() {
             proj.data.layer_data[view.get_layer()][0] = proj.data.layer_data[view.get_layer()][0] == 1 ? 0 : 1;
             const buffers = initBuffers(gl, proj, view);
             drawScene(gl, programInfo, buffers, proj, view);
+            console.log(view.get_layer(), proj.data.layer_data[view.get_layer()][0]);
         } else if (event.key == "=") {
             proj.add_layer(view.get_layer());
             drawScene(gl, programInfo, buffers, proj, view);
@@ -140,17 +140,74 @@ async function main() {
     });
 
     document.getElementById("button_draw").addEventListener("click", function() {
-        if (!toolb) {
-            t = new tool_example2(view);
-            toolb = true;
-        }
+            t = new t_pencil(view);
     });
 
     document.getElementById("button_shape").addEventListener("click", function() {
-        if (toolb) {
-            t = new tool_example(view);
-            toolb = false;
+            t = new t_rectangle(view);
+    });
+
+    document.getElementById("button_fill").addEventListener("click", function() {
+            t = new t_fill(view);
+    });
+
+    document.getElementById("layer_add").addEventListener("click", function() {
+            proj.add_layer(view.get_layer());
+            const buffers = initBuffers(gl, proj, view);
+            drawScene(gl, programInfo, buffers, proj, view);
+
+    });
+
+    document.getElementById("layer_delete").addEventListener("click", function() {
+            proj.delete_layer(view.get_layer());
+            const buffers = initBuffers(gl, proj, view);
+            drawScene(gl, programInfo, buffers, proj, view);
+
+    });
+    // document.getElementById("button_undo").addEventListener("click", function() {
+    //     proj.undo();
+    //     const buffers = initBuffers(gl, proj, view);
+    //     drawScene(gl, programInfo, buffers, proj, view);
+    // });
+
+    // document.getElementById("button_redo").addEventListener("click", function() {
+    //     proj.redo();
+    //     const buffers = initBuffers(gl, proj, view);
+    //     drawScene(gl, programInfo, buffers, proj, view);
+    // });
+
+    document.getElementById("file-export").addEventListener("click", function() {
+        let exp = document.getElementById("exp");
+        exp.width = proj.data.resolution[0];
+        exp.height = proj.data.resolution[1];
+        const context = exp.getContext("2d");
+        let img_data = context.createImageData(proj.data.resolution[0], proj.data.resolution[1]);
+        let data = img_data.data;
+        for (let i = 0; i < proj.data.resolution[0]; i++) {
+            for (let j = 0; j < proj.data.resolution[1]; j++) {
+                let pix = proj.get_pix_sum(i, proj.data.resolution[1] - j - 1);
+                data[(j*proj.data.resolution[1] + i)*4 + 0] = pix[0] * 255;
+                data[(j*proj.data.resolution[1] + i)*4 + 1] = pix[1] * 255;
+                data[(j*proj.data.resolution[1] + i)*4 + 2] = pix[2] * 255;
+                data[(j*proj.data.resolution[1] + i)*4 + 3] = 255;
+            }
         }
+        context.putImageData(img_data, 0, 0);
+        const img_type = "image/png";
+        const img_quality = 1.0;
+        exp.toBlob(
+            (blob) => {
+                const jsonObjectUrl = URL.createObjectURL(blob);
+                const anchorEl = document.createElement("a");
+                anchorEl.href = jsonObjectUrl;
+                anchorEl.download = "export.png";
+
+                anchorEl.click();
+                URL.revokeObjectURL(jsonObjectUrl);
+            },
+            img_type,
+            img_quality
+        );
     });
 
     const colorpicker = document.getElementById("ui-color");
@@ -172,7 +229,7 @@ async function main() {
             let y = Math.round(((1 - (event.offsetY)/view.glh)*2 - view.get_offset()[1]) / view.get_res());
             tool_active = true;
             console.log("x:", x, "y:", y, "client x:", event.offsetX, "client y:", event.offsetY, "offsets:", view.get_offset(), "glw:", view.glw, "glh:", view.glh, "res:", view.get_res());
-            t.on_mouse_down(x, y, view.r(), view.g(), view.b(), view.a());
+            t.on_mouse_down(x, y, view.r(), view.g(), view.b(), view.a(), proj.data.layers[view.get_layer()]);
         }
     })
 
@@ -192,8 +249,9 @@ async function main() {
     
     canvas.addEventListener("mouseup", (event) => {
         if (tool_active) {
-            let x = Math.round((((event.offsetX)/view.glw) - view.get_offset()[0]) / view.get_res() * 2);
-            let y = Math.round(((1 - (event.offsetY)/view.glh) - view.get_offset()[1]) / view.get_res() * 2);
+            view.clear_prev();
+            let x = Math.round((((event.offsetX)/view.glw)*2 - view.get_offset()[0]) / view.get_res());
+            let y = Math.round(((1 - (event.offsetY)/view.glh)*2 - view.get_offset()[1]) / view.get_res());
             t.on_mouse_up(x, y);
             proj.update_pix(view.get_layer(), t.data_send());
             tool_active = false;
