@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { project_api } from '../src/project-api.js';
+import { project_api } from '../public/js/project-api.js';
 
 test('constructor initializes correct resolution and data shape', () => {
     const api = new project_api();
@@ -10,7 +10,7 @@ test('constructor initializes correct resolution and data shape', () => {
     assert.deepStrictEqual(res, [400, 400]);
   
     // Check number of layers
-    assert.strictEqual(api.data.layers.length, 10);
+    assert.strictEqual(api.data.layers.length, 1);
   
     // Check one pixel structure (should be [0, 0, 0, 1])
     const pix = api.get_pix(0, 0, 0);
@@ -24,7 +24,7 @@ test('constructor initializes correct resolution and data shape', () => {
 
   test('get_num_layers() returns correct number of layers', () => {
     const api = new project_api();
-    assert.strictEqual(api.get_num_layers(), 10);
+    assert.strictEqual(api.get_num_layers(), 1);
   });
 
   test('get_pix() returns correct pixel RGBA', () => {

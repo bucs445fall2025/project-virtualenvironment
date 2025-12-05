@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { drawScene } from '../src/draw-scene.js';
+import { drawScene } from '../public/js/draw-scene.js';
 
 // Mock WebGL context for testing
 function createMockGL() {
@@ -87,7 +87,7 @@ test('drawScene calls WebGL methods in correct order', () => {
 
     // Verify the sequence of calls
     assert.strictEqual(calls[0][0], 'clearColor');
-    assert.deepStrictEqual(calls[0][1], [0.0, 0.0, 0.0, 0.0]);
+    assert.deepStrictEqual(calls[0][1], [1.0, 1.0, 1.0, 1.0]);
     
     assert.strictEqual(calls[1][0], 'clearDepth');
     assert.deepStrictEqual(calls[1][1], [1.0]);

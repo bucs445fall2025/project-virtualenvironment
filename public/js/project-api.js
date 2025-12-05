@@ -3,7 +3,6 @@ class project_api {
     constructor(data=null) {
         // If creating Project for the first time.
         if (data == null){
-            console.log("here");
             let w = 400
             let h = 400
             this.data = {resolution : [w, h],layers : [[]], layer_data: []};
@@ -17,7 +16,6 @@ class project_api {
         }
         else {
             this.data = {resolution: data.resolution, layers: data.layers, layer_data: data.layer_data}
-            console.log("or-here");
         }
 
     }

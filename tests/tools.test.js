@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { tool_example, tool_example2 } from '../src/tools.js';
+import { tool_example, tool_example2 } from '../public/js/tools.js';
 
 function createMockView() {
   return { get_res: () => 1, get_offset: () => [0, 0], get_layer: () => 0 };

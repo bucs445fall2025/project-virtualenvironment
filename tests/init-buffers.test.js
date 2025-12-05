@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { initBuffers } from '../src/init-buffers.js';
+import { initBuffers } from '../public/js/init-buffers.js';
 
 // Create a mock WebGL context
 function createMockGL() {
