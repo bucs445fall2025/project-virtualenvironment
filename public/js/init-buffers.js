@@ -30,10 +30,6 @@ function initPositionBuffer(gl, proj, view) {
         }
     }
 
-    for (let i = 0; i < length(view.prev_array); i++) {
-        positions.push(view.prev_array[i][0], view.prev_array[i][1]);
-    }
-
 //    positions.push(
 //     -1, -1, -1, 0, 0, -1, -1, 0, 0, -1, 0, 0
 //    );
@@ -60,10 +56,6 @@ function initColorBuffer(gl, proj, view) {
                 );
             }
         }
-    }
-
-    for (let i = 0; i < view.prev_array.length; i++) {
-        color.push(1, 1, 1);
     }
 
     const colorBuffer = gl.createBuffer();
