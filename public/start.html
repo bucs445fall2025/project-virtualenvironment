@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScreenJump – Projects</title>
+    <link rel="stylesheet" href="css/start.css">
+    <script src="js/homepage.js" type="module"></script>
+</head>
+<body>
+
+    <header class="header">
+        <h1 class="title">ScreenJump</h1>
+        <button class="logout-btn" id="logout-btn" type="button">Logout</button>
+    </header>
+
+    <main class="container">
+
+        <div class="top-bar">
+            <h2>Your Projects</h2>
+            <button class="new-project-btn" id="new-project-btn">+ New Project</button>
+        </div>
+
+        <div id="projects-grid" class="projects-grid">
+
+        </div>
+        <div id="modal-overlay" class="modal-overlay">
+        <div id="popup-div" class="popup">
+            <span  id="myPopup">Enter Project Name</span>
+            <input type="text" id="project-name" required/> 
+            <button class="new-project-btn" id="submit-btn"> Submit </button>
+            <span id="error-message" style="color: red;"></span>
+        </div>
+        </div>
+        <div id="delete-overlay" class="modal-overlay">
+            <div id="delete-popup" class="popup">
+                <span id="deleteTitle"> Delete Project? </span>
+                <div class="button_container" id="button_container">
+                    <button class="new-project-btn" id="cancel-delete-btn"> Cancel </button>
+                    <button class="new-project-btn" id="confirm-delete-btn"> Confirm </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

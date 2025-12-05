@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/loginStyle.css">
+    <script src="js/authscript.js" type="module"></script>
+</head>
+<body>
+    <h1 class="site-title">ScreenJump</h1>
+    <div class="login-container">
+
+        <!-- Login pop up -->
+        <form id="login-form">
+            <h2>Login</h2>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="login-btn">Log In</button>
+            <a href="#" id="show-signup" class="signup-link">Sign Up</a>
+        </form>
+
+        <!-- Signup pop up -->
+        <form id="signup-form" style="display:none;">
+            <h2>Sign Up</h2>
+            <label for="new-email"> Email </label>
+            <input type="text" id="new-email" name="new-email" required> 
+            <label for="new-username">Username</label>
+            <input type="text" id="new-username" name="new-username" required>
+
+            <label for="new-password">Password</label>
+            <input type="password" id="new-password" name="new-password" required>
+
+            <button type="submit" class="login-btn">Create Account</button>
+            <a href="#" id="back-login" class="signup-link">Back to Login</a>
+        </form>
+        <em id="error-message" class="error-message"></em>
+
+    </div>
+</body>
+</html>

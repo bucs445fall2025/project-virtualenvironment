@@ -1,0 +1,38 @@
+!! NOTE THAT THIS IS OUTDATED !!
+We decided to change our project concept, because this idea seemed likely to be too big for the scope of the class. I will update this section soon -Brendan
+
+- How will you use this application?
+    - To collaboratively draw and design and manipulate digital raster art..
+- Where would the user be located physically when using this application?
+    - In front of a personal computer.
+- Where would the results be visible?
+    - In a web browser.
+- When will this application be used?
+    - Whenever user wants to draw or design art, either collaboratively or on their own.
+- When can the application fail?
+    - If the server and client aren't able to send each other necessary information; would result in work done by other users not loading properly
+    - If information is not processed/communicated accurately; would result in client seeing incorrect/glitched data
+    - If server cannot resolve conflicts between clients; might have to choose one user's edits over anothers
+- Who is my user?
+    - Artists, those with an interest in digital art
+    - A group of friends looking for something to do on the internet
+- Who will recieve the outputs of the application?
+    - Any user who is connected to the relevant drawing instance.
+- What do I know about this application?
+    - Should be modular and flexible to allow for different use-cases.
+- What does this application need to do?
+    - Maintain communication between server and multiple clients.
+    - Implement pertinent tools for an art program (paintbrush, eraser, pencil, etc)
+    - Accurately load and render 2D pictures.
+- What are the components of this application?
+    - Server-side application: hosts drawing instance, and maintains syncronization between all users.
+    - Database(s): Contains the raster(pixel) data of each saved image
+    - Client-side application: allows user to access art instance, accurately displaying picture, processing user input, and communicating with server.
+- What needs to happen next?
+    - Creating initial react app, designing a basic UI for the site itself
+    - Implement framework for raster art, as well as setting up the logic for sewrver communication 
+- What must happen before the next step?
+    - Developing a strong enough understanding of WebGL to begin programming the actual program.
+    - Finalizing the design for how art data will be structured (what kinds of objects can be processed and how is data attached to those objects, etc.)
+- What needs to be tracked?
+    - The tools we have implemented, the raster files.
